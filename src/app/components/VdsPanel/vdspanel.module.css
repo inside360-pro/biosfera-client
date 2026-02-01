@@ -1,0 +1,102 @@
+.dsv_panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    background-color: var(--background-color);
+    padding: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+@media (max-width: 560px) {
+    .dsv_panel {
+        gap: 10px;
+        padding: 0;
+        font-size: 14px;
+        padding-bottom: 30px;
+    }
+
+}
+
+.p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.button {
+    padding: 10px;
+    border: none;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.theme_white {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.theme_black {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.theme_blue {
+    background-color: var(--light-blue);
+    color: var(--blue);
+}
+
+.theme_yellow {
+    background-color: var(--light-yellow);
+    color: var(--yellow);
+}
+
+.theme_green {
+    background-color: var(--light-green);
+    color: var(--green);
+}
+
+.color_1 {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.color_2 {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.color_3 {
+    background-color: var(--light-blue);
+    color: var(--blue);
+}
+
+.color_4 {
+    background-color: var(--light-yellow);
+    color: var(--yellow);
+}
+
+.color_5 {
+    background-color: var(--light-green);
+    color: var(--green);
+}
+
+.filter {
+    filter: grayscale(100%);
+}
+
+.btn_close {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--black);
+}

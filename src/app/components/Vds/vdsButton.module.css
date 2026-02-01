@@ -1,0 +1,57 @@
+.button {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    padding: 6px 20px;
+    background-color: transparent;
+    cursor: pointer;
+
+    transition: all var(--anim-function);
+}
+
+.button svg {
+    fill: var(--green);
+    transition: all var(--anim-function);
+}
+
+.p {
+    margin-left: 10px;
+}
+
+.button:hover {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.button:active {
+    background-color: var(--violet);
+    color: var(--white);
+    border: 1px solid var(--violet);
+}
+
+.button:hover svg,
+.button:active svg {
+    fill: var(--white);
+}
+
+@media (max-width: 1023px) {
+    .p {
+        display: none;
+    }
+
+    .button {
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 560px) {
+    .button {
+        padding: 5px 5px;
+    }
+}

@@ -1,13 +1,36 @@
+/*
+  20px - font-size: 1.25em;
+  18px - font-size: 1.125em;
+  16px - font-size: 1em;
+  14px - font-size: 0.875em;
+  12px - font-size: 0.75em;
+  10px - font-size: 0.625em;
+*/
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Переменные для плагина */
+  --light-yellow: #F7F3D6;
+  --light-green: #3B2716;
+  --black: #191830;
+  --black-toggle: #191830;
+  --dark-blue: #282646;
+  --white: #FFFFFF;
+  --gray: #EBEEF8;
+  --dark-gray: #e4e8f5;
+  --light-blue: #37A4DA;
+  --yellow: #FCCC05;
+  --green: #29A55C;
+  --violet: #433C8C;
+  --violet2: #474092;
+  --purple: #7B1FA2;
+  --orange: #FFB236;
+  --slate-gray: #757f99;
+  --violet-gradient: linear(from(#433C8C) to (#625AB6));
+  --purple-gradient: linear(from(#7B1FA2) to (#A340CD));
 }
 
 html,
@@ -35,8 +58,8 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
