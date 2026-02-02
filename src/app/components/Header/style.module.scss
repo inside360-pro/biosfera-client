@@ -6,3 +6,8 @@
     color: red;
     @include adaptiv-value("font-size", 102, 32);
 }
+
+.text {
+    color: blue;
+    @include adaptiv-value("font-size", 36, 16);
+}
