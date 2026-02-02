@@ -16,18 +16,25 @@ export default function VdsPanel({ setPanel, setPanelBtn }) {
         speechSynthesis.speak(new SpeechSynthesisUtterance(txt));
     }
 
+    const getRootFontSizePx = () =>
+        parseFloat(window.getComputedStyle(document.documentElement).fontSize);
+
+    const setRootFontSizePx = (px) => {
+        document.documentElement.style.fontSize = `${px}px`;
+    };
+
     // Уменьшение шрифта
     const fontDecrease = () => {
-        const currentFontSize = parseInt(window.getComputedStyle(document.body).fontSize);
+        const currentFontSize = getRootFontSizePx();
         const newFontSize = currentFontSize - 2;
-        document.body.style.fontSize = newFontSize + 'px';
+        setRootFontSizePx(newFontSize);
         speachtxt("размер шрифта уменьшен");
     }
     // Увеличение шрифта
     const fontIncrease = () => {
-        const currentFontSize = parseInt(window.getComputedStyle(document.body).fontSize);
+        const currentFontSize = getRootFontSizePx();
         const newFontSize = currentFontSize + 2;
-        document.body.style.fontSize = newFontSize + 'px';
+        setRootFontSizePx(newFontSize);
         speachtxt("размер шрифта увеличен");
     }
 
