@@ -9,36 +9,30 @@ export default function Header() {
   const [panelBtn, setPanelBtn] = useState(true);
   const [searchOpened, setSearchOpened] = useState(false);
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
-  // закрываем поиск при клике вне попапа
-useEffect(() => {
-  const handleClickOutside = (event: MouseEvent) => {
+  // закрываем поиск при клике вне кнопки и вне области поиска
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (!searchOpened) return;
 
-      // const isClickOutsideMenu = !menuRef.current || !menuRef.current.contains(event.target as Node);
-      const isClickOutsideButton = !buttonRef.current || !buttonRef.current.contains(event.target as Node);
+      const targetNode = event.target as Node | null;
+      if (!targetNode) return;
 
-      // if (isClickOutsideMenu && isClickOutsideButton) {
-      //     setSearchOpened(false);
-      // }
-      if (isClickOutsideButton) {
-          setSearchOpened(false);
+      const isInsideButton = !!buttonRef.current?.contains(targetNode);
+      const isInsideSearch = !!searchContainerRef.current?.contains(targetNode);
+
+      if (!isInsideButton && !isInsideSearch) {
+        setSearchOpened(false);
       }
-  };
+    };
 
-  const handleSliderClick = () => {
-      setSearchOpened(false);
-  };
-
-  document.addEventListener("mousedown", handleClickOutside);
-  document.addEventListener("sliderClick", handleSliderClick);
-  return () => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("sliderClick", handleSliderClick);
-  };
-}, [searchOpened]);
-
-const buttonRef = useRef<HTMLButtonElement>(null);
+    };
+  }, [searchOpened]);
 
   return (
     <header className="relative">
@@ -80,7 +74,9 @@ const buttonRef = useRef<HTMLButtonElement>(null);
             </div>
         </div>
 
-        {searchOpened && <Search />}
+        <div ref={searchContainerRef}>
+          {searchOpened && <Search />}
+        </div>
       </div>
     </header>
   );
