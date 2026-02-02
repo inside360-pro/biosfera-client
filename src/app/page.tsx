@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { Header, VdsButton, VdsPanel } from "./components";
+import { AnimateElement, Header, VdsButton, VdsPanel } from "./components";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -40,12 +40,12 @@ export default function Home() {
         priority
       />
 
-    <p>
+      <AnimateElement element="p">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id adipisci,
         temporibus nesciunt cumque deleniti, quas eligendi est esse,
         reprehenderit aperiam quasi quo nisi accusantium aspernatur soluta
         doloribus eos nemo molestiae!
-      </p>
+      </AnimateElement>
     </main>
   );
 }

@@ -1,0 +1,53 @@
+/* Стили для анимации хука useAnimate */
+
+.fadeUp {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: var(--animation-delay, 0s);
+
+}
+
+.fadeUp.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeRight {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: var(--animation-delay, 0s);
+
+}
+
+.fadeRight.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fadeLeft {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: var(--animation-delay, 0s);
+
+}
+
+.fadeLeft.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fadeDown {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: var(--animation-delay, 0s);
+
+}
+
+.fadeDown.active {
+  opacity: 1;
+  transform: translateY(0);
+}
