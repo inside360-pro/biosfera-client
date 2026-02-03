@@ -1,7 +1,7 @@
 'use client'
 import { useForm } from 'react-hook-form';
 import styles from './style.module.scss';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { initPhoneMask } from '@/app/utils/phone-mask';
 
 
@@ -20,7 +20,7 @@ export default function Form() {
         reset,
         setValue,
         watch
-    } = useForm({
+    } = useForm<FormData>({
         defaultValues: {
             phone: '', // Инициализируем phone пустой строкой
             name: '', // Инициализируем name пустой строкой
@@ -30,12 +30,12 @@ export default function Form() {
 
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
-    const [sending, isSending] = useState(false);
+    const [sending, setSending] = useState(false);
 
     const phoneValue = watch('phone'); // Отслеживаем значение поля phone
 
     const onSubmit = async (formData: FormData) => {
-        isSending(true);
+        setSending(true);
         try {
             const response = await fetch('/api/emails', {
                 method: 'POST',
@@ -50,35 +50,21 @@ export default function Form() {
                 // console.log(data);
 
                 setIsSuccess(true);
-                isSending(false);
+                setSending(false);
                 setError(undefined);
                 // setActive(false)
                 reset();
             } else {
-                isSending(false);
+                setSending(false);
                 setError('Что-то пошло не так');
                 console.error('Статус ошибки:', response.status);
             }
         } catch (err) {
             setError('Ошибка запроса, попробуйте позже');
-            isSending(false);
+            setSending(false);
             console.error('Fetch error:', err);
         }
     }
-
-    const inputRefs = useRef([]);
-
-    useEffect(() => {
-        inputRefs.current.forEach((input) => {
-            if (input) {
-                initPhoneMask(input);
-                // Добавляем обработчик изменения значения
-                input.addEventListener('input', (e) => {
-                    setValue('phone', e.target.value); // Обновляем значение в react-hook-form
-                });
-            }
-        });
-    }, [setValue]);
 
     return (
         <form
@@ -98,22 +84,26 @@ export default function Form() {
             </div>
 
             <div className={`${styles.input_wrapper}`}>
+                {(() => {
+                    const { ref: phoneRef, ...phoneRegister } = register('phone', {
+                        required: { value: true, message: 'Введите телефон' },
+                    });
+
+                    return (
                 <input
                     placeholder='Введите телефон'
-                    {...register('phone', {
-                        required: { value: true, message: 'Введите телефон' },
-                    })}
+                    {...phoneRegister}
                     value={phoneValue || ''} // Убедимся, что значение никогда не undefined
                     onChange={(e) => setValue('phone', e.target.value)} // Обновляем значение в react-hook-form
                     ref={(el) => {
-                        if (el && !inputRefs.current.includes(el)) {
-                            inputRefs.current.push(el);
-                            initPhoneMask(el); // Инициализация маски
-                        }
+                        phoneRef(el);
+                        if (el) initPhoneMask(el); // Инициализация маски
                     }}
                     className={styles.form__input}
                     type='tel'
                 />
+                    );
+                })()}
                 <div className={styles.input_text_error}>{errors['phone'] && errors['phone'].message}</div>
             </div>
 
@@ -121,7 +111,7 @@ export default function Form() {
                 <p>Оставить заявку</p>
 
                 {sending &&
-                    <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a9" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stopColor="#ffffff"></stop><stop offset=".3" stopColor="#ffffff" stopOpacity=".9"></stop><stop offset=".6" stopColor="#ffffff" stopOpacity=".6"></stop><stop offset=".8" stopColor="#ffffff" stopOpacity=".3"></stop><stop offset="1" stopColor="#ffffff" stopOpacity="0"></stop></radialGradient><circle transformOrigin="center" fill="none" stroke="url(#a9)" strokeWidth="15" strokeLinecap="round" strokeDasharray="200 1000" strokeDashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle transformOrigin="center" fill="none" opacity=".2" stroke="#ffffff" strokeWidth="15" strokeLinecap="round" cx="100" cy="100" r="70"></circle></svg>
+                    <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a9" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stopColor="#ffffff"></stop><stop offset=".3" stopColor="#ffffff" stopOpacity=".9"></stop><stop offset=".6" stopColor="#ffffff" stopOpacity=".6"></stop><stop offset=".8" stopColor="#ffffff" stopOpacity=".3"></stop><stop offset="1" stopColor="#ffffff" stopOpacity="0"></stop></radialGradient><circle style={{ transformOrigin: 'center' }} fill="none" stroke="url(#a9)" strokeWidth="15" strokeLinecap="round" strokeDasharray="200 1000" strokeDashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle style={{ transformOrigin: 'center' }} fill="none" opacity=".2" stroke="#ffffff" strokeWidth="15" strokeLinecap="round" cx="100" cy="100" r="70"></circle></svg>
                 }
             </button>
 
