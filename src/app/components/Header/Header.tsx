@@ -2,12 +2,13 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./style.module.scss";
 import Image from "next/image";
-import { VdsButton, VdsPanel, Search } from "@/app/components";
+import { VdsButton, VdsPanel, Search, Popup } from "@/app/components";
 
 export default function Header() {
   const [panel, setPanel] = useState(false);
   const [panelBtn, setPanelBtn] = useState(true);
   const [searchOpened, setSearchOpened] = useState(false);
+  const [popupOpened, setPopupOpened] = useState(false);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -54,7 +55,7 @@ export default function Header() {
               <span>+7 (924) 338-81-89</span>
             </a>
 
-            <button className={styles.primary_button}>Записаться на прием</button>
+            <button className={styles.primary_button} onClick={() => setPopupOpened(true)}>Записаться на прием</button>
 
             <div className={styles.header_social}>
               <button className={styles.item__button} title="Личный кабинет">
@@ -78,6 +79,8 @@ export default function Header() {
           {searchOpened && <Search />}
         </div>
       </div>
+
+      <Popup active={popupOpened} setActive={setPopupOpened} />
     </header>
   );
 }
