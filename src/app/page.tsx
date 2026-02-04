@@ -8,11 +8,11 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {/* <Header />
+      <Header />
       <Hero />
       <Services />
       <Gallery />
-      <About /> */}
+      <About />
       <Doctors />
       <Image
         src="/Item.png"

@@ -4,7 +4,7 @@ import styles from "./style.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Slider } from "@/app/components";
+import { SliderGallery } from "@/app/components";
 
 export default function Gallery() {
 
@@ -16,7 +16,7 @@ export default function Gallery() {
                         <h2>Галерея</h2>
                         <p>Мы создаём спокойную и комфортную среду, в которой пациент чувствует себя уверенно и безопасно</p>
                     </div>
-                    <Slider />
+                    <SliderGallery />
                 </div>
             </div>
         </section>
