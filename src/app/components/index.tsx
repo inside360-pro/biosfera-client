@@ -5,4 +5,6 @@ export { default as AnimateElement } from "./AnimateElement/AnimateElement";
 export { default as Search } from "./Search/Search";
 export { default as Popup } from "./Popup/Popup";
 export { default as Form } from "./Form/Form";
+export { default as SliderGallery } from "./SliderGallery/SliderGallery";
 export { default as Slider } from "./Slider/Slider";
+
