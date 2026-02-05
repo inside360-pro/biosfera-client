@@ -8,4 +8,5 @@ export { default as Form } from "./Form/Form";
 export { default as SliderGallery } from "./SliderGallery/SliderGallery";
 export { default as Slider } from "./Slider/Slider";
 export { default as DoctorCard } from "./DoctorCard/DoctorCard";
+export { default as NewsCard } from "./NewsCard/NewsCard";
 
