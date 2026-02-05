@@ -5,3 +5,5 @@ export { default as About } from "./About/About";
 export { default as Doctors } from "./Doctors/Doctors";
 export { default as Map } from "./Map/Map";
 export { default as Footer } from "./Footer/Footer";
+export { default as News } from "./News/News";
+export { default as Owner } from "./Owner/Owner";

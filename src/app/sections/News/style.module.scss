@@ -1,0 +1,45 @@
+@use "@app/mixins" as *;
+
+.doctors {
+    @include adaptiv-value("margin-top", 100, 50);
+}
+
+.doctors_wrapper {
+    border-top: 1px solid var(--gray);
+    padding: 30px 0;
+}
+
+.doctors__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 30px;
+
+    p {
+        font-weight: 600;
+        font-size: 1.125rem;
+        color: var(--text-gray);
+        max-width: 430px;
+
+        @media (max-width:768px) {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width:768px) {
+        flex-direction: column;
+    }
+}
+
+.doctors__title {
+    max-width: 800px;
+    font-weight: 600;
+    line-height: 120%;
+    @include adaptiv-value("font-size", 46, 26);
+}
+
+.news__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}

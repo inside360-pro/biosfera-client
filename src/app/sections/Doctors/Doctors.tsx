@@ -66,8 +66,7 @@ export default function Doctors() {
                         <h2 className={styles.doctors__title}><span className="text-gradient">Врачи, которые разбираются</span> и&nbsp;берут ответственность</h2>
                         <p>Консультации без спешки, понятные рекомендации и сопровождение пациента на всех этапах — от&nbsp;первого приёма до&nbsp;результата</p>
                     </div>
-
-                    
+                
                     <Slider data={data} Card={DoctorCard} slidesPerView={4}/>
                 </div>
             </div>

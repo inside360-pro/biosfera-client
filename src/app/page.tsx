@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AnimateElement, Header } from "./components";
-import { Hero, Services, Gallery, About, Doctors, Map, Footer } from "./sections";
+import { Hero, Services, Gallery, About, Doctors, News, Owner, Map, Footer } from "./sections";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -12,11 +12,14 @@ export default function Home() {
       <Hero />
       <Services />
       <Gallery />
+      <Owner />
       <About />
       <Doctors />
+      <News />
       <Map />
       <Footer />
-      {/* <Image
+     
+      <Image
         src="/Item.png"
         alt="VDS"
         width={460}

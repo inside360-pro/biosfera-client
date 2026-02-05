@@ -24,33 +24,57 @@ type SliderProps<TItem> = {
     getKey?: (item: TItem, index: number) => Key;
     breakpoints?: SliderBreakpoints;
     slidesPerView?: number;
+    slidesPerGroup?: number;
     spaceBetween?: number;
     loop?: boolean;
+    breakpointsBase?: "window" | "container";
 };
 
+// 4 карточки
 const DEFAULT_BREAKPOINTS: SliderBreakpoints = {
-    320: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
+    0: { slidesPerView: 2, slidesPerGroup: 2 },
+    768: { slidesPerView: 2, slidesPerGroup: 2 },
     1023: { slidesPerView: 3 },
     1440: { slidesPerView: 4 },
+};
+
+// 3 карточки
+const DEFAULT_BREAKPOINTS_3: SliderBreakpoints = {
+    0: { slidesPerView: 2, slidesPerGroup: 2 },
+    768: { slidesPerView: 2, slidesPerGroup: 2 },
+    1023: { slidesPerView: 3 },
 };
 
 export default function Slider<TItem>({
     data,
     Card,
+    breakpoints,
     slidesPerView,
- }: SliderProps<TItem>) {
+    slidesPerGroup,
+    spaceBetween = 20,
+    loop = true,
+    breakpointsBase = "container",
+}: SliderProps<TItem>) {
 
-    console.log(data);
+    const resolvedBreakpoints =
+        breakpoints ?? (slidesPerView === 3 ? DEFAULT_BREAKPOINTS_3 : DEFAULT_BREAKPOINTS);
+
+    const swiperBaseProps = {
+        spaceBetween,
+        loop,
+        modules: [Navigation],
+        breakpoints: resolvedBreakpoints,
+        breakpointsBase,
+        observer: true,
+        observeParents: true,
+    };
 
     return (
         <div className={`${styles.about_wrapper}`}>
             <Swiper
-                spaceBetween={20}
-                loop={true}
-                modules={[Navigation]}
-                slidesPerView={slidesPerView}
-                breakpoints={DEFAULT_BREAKPOINTS}
+                {...swiperBaseProps}
+                {...(slidesPerView !== undefined ? { slidesPerView } : {})}
+                {...(slidesPerGroup !== undefined ? { slidesPerGroup } : {})}
             >
                 {data?.length > 0 && data?.map((item, index) => (
                     <SwiperSlide
@@ -59,7 +83,6 @@ export default function Slider<TItem>({
                         <Card data={item} />
                     </SwiperSlide>
                 ))}
-
 
                 <SwiperNavButtons
                     addClass={'buttons_bottom'}

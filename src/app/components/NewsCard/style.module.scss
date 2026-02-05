@@ -1,0 +1,52 @@
+@use "@app/mixins" as *;
+
+
+.news__item {
+    position: relative;
+    min-height: 425px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+
+    padding: 25px 28px 30px;
+
+    --nb-r: 10px;
+    --nb-w: 10px;
+    --nb-h: 10px;
+    --nb-cor1-rw: 10px;
+    --nb-cor1-rh: 10px;
+    --nb-cor2-rw: 10px;
+    --nb-cor2-rh: 10px;
+    --nb-curve-rw: 70px;
+    --nb-curve-rh: 70px;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}
+
+.news_label {
+    border-radius: 100px;
+    backdrop-filter: blur(100px);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    padding: 10px 25px;
+    font-size: 1.125rem;
+    width: fit-content;
+}
+
+.news__title {
+    font-weight: 600;
+    @include adaptiv-value("font-size", 24, 18);
+    line-height: 120%;
+    color: var(--white);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    width: 90%;
+}
