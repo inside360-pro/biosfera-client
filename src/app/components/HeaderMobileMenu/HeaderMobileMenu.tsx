@@ -7,9 +7,9 @@ import styles from "./style.module.scss";
 const menuLinks = [
   {
     title: "Услуги",
-    url: "#",
+    url: "/services",
     submenu: [
-      { title: "Услуга 1", url: "#" },
+      { title: "Услуга 1", url: "https://inside360.ru" },
       { title: "Услуга 2", url: "#" },
       { title: "Услуга 3", url: "#" },
     ],
@@ -29,6 +29,7 @@ export default function HeaderMobileMenu({
 }: {
   active: boolean;
   setActive: (active: boolean) => void;
+  setPopupOpened: (opened: boolean) => void;
 }) {
   const [submenuOpen, setSubmenuOpen] = useState(false);
 
@@ -64,14 +65,28 @@ export default function HeaderMobileMenu({
       </header>
 
       <ul className={styles.nav_list}>
-        {menuLinks.map((item) => (
+        {menuLinks.map((item, idx) => (
           <li className={styles.nav_item} key={item.title}>
             <div className={styles.nav_item_inner}>
               {!item.submenu && <Link href={item.url}>{item.title}</Link>}
               {item.submenu && (
-                <span onClick={() => setSubmenuOpen(!submenuOpen)}>
+                <Link
+                  href={item.url}
+                  aria-expanded={submenuOpen}
+                  aria-controls={`mobile-submenu-${idx}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSubmenuOpen(!submenuOpen);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === " ") {
+                      e.preventDefault();
+                      setSubmenuOpen(!submenuOpen);
+                    }
+                  }}
+                >
                   {item.title}
-                </span>
+                </Link>
               )}
               {item.submenu && (
                 <Image
@@ -85,6 +100,7 @@ export default function HeaderMobileMenu({
             </div>
             {item.submenu && (
               <ul
+                id={`mobile-submenu-${idx}`}
                 className={`${styles.submenu_list} ${submenuOpen ? styles.active : ""}`}
               >
                 <li className={styles.nav_item} key={item.title}>
@@ -124,6 +140,7 @@ export default function HeaderMobileMenu({
       </a>
 
       <button
+        type="button"
         className={styles.primary_button}
         onClick={() => setPopupOpened(true)}
       >
