@@ -93,25 +93,10 @@ export default function Map() {
                 )}
               </div>
 
-              {/* <a
-                href={YANDEX_MAPS_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.map__yandex_btn}
-              >
-                <Image
-                  src="/icons/pin-red.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                />
-                Открыть в Яндекс Картах
-              </a> */}
-
               <ul className={styles.map__contacts}>
                 <li className={styles.map__contact}>
                   <Image
-                    src="/icons/pin-icon.svg"
+                    src="/icons/geo_b.svg"
                     alt=""
                     width={24}
                     height={24}

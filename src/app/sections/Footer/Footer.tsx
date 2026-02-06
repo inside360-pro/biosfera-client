@@ -179,6 +179,16 @@ export default function Footer() {
               <Image src="/images/image 3.svg" alt="" width={60 } height={60} />
               <Image src="/images/image 4.svg" alt="" width={60} height={60} />
             </div>
+
+            <a
+                href="https://cr.minzdrav.gov.ru"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.footer__cr_link_mobile}
+              >
+                Клинические рекомендации
+                https://cr.minzdrav.gov.ru
+              </a>
             <div className={styles.footer__legal}>
               {LEGAL_LINKS.map((link) => (
                 <Link
@@ -189,7 +199,6 @@ export default function Footer() {
                   {link.label}
                 </Link>
               ))}
-            </div>
             <Link
               href="https://inside360.ru"
               target="_blank"
@@ -198,6 +207,7 @@ export default function Footer() {
             >
               Разработка и продвижение сайтов INSIDE360
             </Link>
+            </div>
           </div>
           <div className={styles.footer__disclaimer_inner}>
             <p className={styles.footer__disclaimer_title}>
