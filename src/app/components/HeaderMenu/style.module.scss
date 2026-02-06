@@ -1,0 +1,64 @@
+// @include adaptiv-value("font-size", 16, 13);
+// @use "../../mixins" as *;
+@use "@app/mixins" as *;
+
+
+.nav_wrapper {
+    padding: 20px 0;
+
+    @media (max-width: 560px) {
+        display: none;
+    }
+}
+
+.nav_list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.nav_item {
+    position: relative;
+
+    a {
+        font-weight: 600;
+        font-size: 1.25rem;
+        transition: color var(--transition);
+    }
+
+    a:hover {
+        color: var(--hover);
+    }
+
+    &:hover {
+        .submenu_list {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+.submenu_list {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    position: absolute;
+    width: 200px;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.submenu_item {
+    padding: 5px 0;
+
+    a {
+        display: block;
+    }
+}

@@ -10,6 +10,44 @@
     border-bottom: 1px solid var(--gray);
 
     flex-wrap: wrap;
+
+    @media (max-width: 860px) {
+        gap: 10px;
+    }
+
+    @media (max-width: 560px) {
+        justify-content: space-between;
+    }
+}
+
+.logo_link {
+
+    img {
+        @media (max-width: 860px) {
+            width: 157px;
+            height: 34px;
+        }
+    }
+}
+
+.address_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    @media (max-width: 860px) {
+        font-size: 9px;
+        gap: 5px;
+
+        img {
+            width: 9px;
+            height: 9px;
+        }
+    }
+
+    @media (max-width: 560px) {
+        display: none;
+    }
 }
 
 .primary_button {
@@ -19,6 +57,23 @@
     border: 1px solid var(--button-border);
     border-radius: 30px;
     cursor: pointer;
+    font-weight: 700;
+    font-size: 1.125rem;
+
+    &:hover {
+        color: var(--hover);
+        background: white;
+        border: 1px solid var(--hover);
+    }
+
+    @media (max-width: 860px) {
+        font-size: 0.625rem;
+        padding: 5px 10px;
+    }
+
+    @media (max-width: 560px) {
+        display: none;
+    }
 }
 
 .item__button {
@@ -31,36 +86,62 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 860px) {
+        width: 30px;
+        height: 30px;
+
+        img {
+            width: 15px;
+            height: 15px;
+        }
+    }
 }
 
 .header_social {
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 860px) {
+        gap: 10px;
+    }
 }
 
-.nav_wrapper {
-    padding: 20px 0;
-}
-
-.nav_list {
+.phone_link {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 10px;
+    font-weight: 900;
 
-    flex-wrap: wrap;
-}
+    transition: color var(--transition);
 
-.nav_item {
-
-    a {
-        font-weight: 600;
-        font-size: 1.25rem;
-        transition: color var(--transition);
+    &:hover {
+        color: var(--hover);
     }
 
-    a:hover {
-        color:var(--hover);
+    @media (max-width: 860px) {
+        font-size: 9px;
+        gap: 5px;
+
+        img {
+            width: 9px;
+            height: 9px;
+        }
+    }
+
+    @media (max-width: 560px) {
+        display: none;
+    }
+}
+
+.burger_button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: none;
+
+    @media (max-width: 560px) {
+        display: block;
     }
 }

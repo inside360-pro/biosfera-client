@@ -9,3 +9,15 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (max-width: 860px) {
+    .item__button {
+        width: 30px;
+        height: 30px;
+        
+        img {
+            width: 15px;
+            height: 15px;
+        }
+    }
+}

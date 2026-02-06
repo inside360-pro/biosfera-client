@@ -9,4 +9,5 @@ export { default as SliderGallery } from "./SliderGallery/SliderGallery";
 export { default as Slider } from "./Slider/Slider";
 export { default as DoctorCard } from "./DoctorCard/DoctorCard";
 export { default as NewsCard } from "./NewsCard/NewsCard";
-
+export { default as HeaderMenu } from "./HeaderMenu/HeaderMenu";
+export { default as HeaderMobileMenu } from "./HeaderMobileMenu/HeaderMobileMenu";
