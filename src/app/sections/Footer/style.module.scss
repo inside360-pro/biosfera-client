@@ -13,15 +13,16 @@ $footer-bottom-bg: rgba(0, 0, 0, 0.2);
 
 .footer {
   margin-top: 50px;
+  margin-bottom: 50px;
   color: $footer-text;
 
   @media screen and (max-width: 768px) {
     margin-top: 40px;
-  } 
+  }
 
   @media screen and (max-width: 576px) {
     margin-top: 30px;
-  } 
+  }
 }
 
 .footer__gradient {
@@ -555,6 +556,6 @@ $footer-bottom-bg: rgba(0, 0, 0, 0.2);
   @media screen and (max-width: 768px) {
     display: block;
     font-size: 12px;
-    
+
   }
-} 
+}

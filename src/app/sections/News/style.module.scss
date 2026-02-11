@@ -1,7 +1,7 @@
 @use "@app/mixins" as *;
 
 .doctors {
-    @include adaptiv-value("margin-top", 100, 50);
+    @include adaptiv-value("margin-top", 100, 30);
 }
 
 .doctors_wrapper {
@@ -17,7 +17,7 @@
 
     p {
         font-weight: 600;
-        font-size: 1.125rem;
+        @include adaptiv-value("font-size", 18, 12);
         color: var(--text-gray);
         max-width: 430px;
 
@@ -28,6 +28,7 @@
 
     @media (max-width:768px) {
         flex-direction: column;
+        gap: 10px;
     }
 }
 

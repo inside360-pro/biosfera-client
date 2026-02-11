@@ -1,13 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
 
-import styles from "./style.module.scss";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Popup } from "@/app/components";
+
+import { usePopupStore } from "@/app/store/popupStore";
+import { AnimateElement } from "@/app/components";
+import styles from "./style.module.scss";
 
 export default function Hero() {
-  const [popupOpened, setPopupOpened] = useState(false);
   const [miniPopupClosed, setMiniPopupClosed] = useState(true);
+  const { togglePopupState } = usePopupStore();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,6 +19,11 @@ export default function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
+  const miniPopupCloseHandler = () => {
+    setMiniPopupClosed(true);
+    togglePopupState();
+  };
+
   return (
     <section>
       <div className={styles.hero_wrapper}>
@@ -25,19 +32,26 @@ export default function Hero() {
           alt="bg-image"
           width={1740}
           height={766}
-          className={`${styles.hero_bg} dsv-image}`}
+          className={`${styles.hero_bg} dsv-image`}
           priority
         />
         <div className={styles.hero_content}>
-          <h2 className={styles.hero_title}>
-            «Биосфера ДВ» — забота о&nbsp;вашем здоровье на всех этапах
-          </h2>
-          <button
-            className={styles.hero_button}
-            onClick={() => setPopupOpened(true)}
+          <AnimateElement
+            element="h2"
+            animationName="fadeUp"
+            className={styles.hero_title}
           >
-            Записаться на прием
-          </button>
+            «Биосфера ДВ» — забота о&nbsp;вашем здоровье на всех этапах
+          </AnimateElement>
+          <AnimateElement animationDelay={100}>
+            <button
+              className={styles.hero_button}
+              onClick={togglePopupState}
+              type="button"
+            >
+              Записаться на прием
+            </button>
+          </AnimateElement>
         </div>
 
         <div className={`${styles.hero_ladel} ${styles.hero_ladel_1}`}>
@@ -71,6 +85,7 @@ export default function Hero() {
           Записаться онлайн
         </a> */}
         <button
+          type="button"
           className={styles.scroll_down_button}
           onClick={() => {
             const servicesSection = document.getElementById("services");
@@ -83,11 +98,10 @@ export default function Hero() {
         </button>
       </div>
 
-      <Popup active={popupOpened} setActive={setPopupOpened} />
-
       {!miniPopupClosed && (
         <section className={styles.mini_popup}>
           <button
+            type="button"
             onClick={() => setMiniPopupClosed(true)}
             className={styles.mini_popup_close_button}
           >
@@ -102,8 +116,9 @@ export default function Hero() {
             <h2>Есть вопросы?</h2>
             <p>Мы перезвоним вам в течение нескольких минут</p>
             <button
+              type="button"
               className={`${styles.hero_button} ${styles.hero_button_small}`}
-              onClick={() => setPopupOpened(true)}
+              onClick={miniPopupCloseHandler}
             >
               Записаться на прием
             </button>

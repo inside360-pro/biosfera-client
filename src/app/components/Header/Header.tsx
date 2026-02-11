@@ -6,16 +6,16 @@ import {
   VdsButton,
   VdsPanel,
   Search,
-  Popup,
   HeaderMenu,
   HeaderMobileMenu,
 } from "@/app/components";
+import { usePopupStore } from "@/app/store/popupStore";
 
 export default function Header() {
   const [panel, setPanel] = useState(false);
   const [panelBtn, setPanelBtn] = useState(true);
   const [searchOpened, setSearchOpened] = useState(false);
-  const [popupOpened, setPopupOpened] = useState(false);
+  const { togglePopupState } = usePopupStore();
   const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
 
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -99,13 +99,18 @@ export default function Header() {
 
           <button
             className={styles.primary_button}
-            onClick={() => setPopupOpened(true)}
+            onClick={togglePopupState}
+            type="button"
           >
             Записаться на прием
           </button>
 
           <div className={styles.header_social}>
-            <button className={styles.item__button} title="Личный кабинет">
+            <button
+              className={styles.item__button}
+              title="Личный кабинет"
+              type="button"
+            >
               <Image
                 src="/icons/account-icon.svg"
                 className="dsv-image"
@@ -120,6 +125,7 @@ export default function Header() {
             )}
 
             <button
+              type="button"
               className={styles.item__button}
               ref={buttonRef}
               onClick={() => setSearchOpened(!searchOpened)}
@@ -140,12 +146,11 @@ export default function Header() {
         <HeaderMobileMenu
           active={mobileMenuOpened}
           setActive={setMobileMenuOpened}
-          setPopupOpened={setPopupOpened}
+          setPopupOpened={togglePopupState}
         />
 
         <div ref={searchContainerRef}>{searchOpened && <Search />}</div>
       </div>
-      <Popup active={popupOpened} setActive={setPopupOpened} />
     </header>
   );
 }

@@ -17,8 +17,8 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Header />
-      {/* <Hero /> */}
-      {/* <Services /> */}
+      <Hero />
+      <Services />
       <About />
       <Gallery />
       <Owner />
@@ -27,16 +27,16 @@ export default function Home() {
       <Map />
       <Footer />
 
-      <Image
+      {/* <Image
         src="/Item.png"
         alt="VDS"
         width={460}
         height={425}
         className="dsv-image"
         priority
-      />
+      /> */}
 
-      <p className="text">
+      {/* <p className="text">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id adipisci,
         temporibus nesciunt cumque deleniti, quas eligendi est esse,
         reprehenderit aperiam quasi quo nisi accusantium aspernatur soluta
@@ -48,7 +48,7 @@ export default function Home() {
         temporibus nesciunt cumque deleniti, quas eligendi est esse,
         reprehenderit aperiam quasi quo nisi accusantium aspernatur soluta
         doloribus eos nemo molestiae!
-      </AnimateElement>
+      </AnimateElement> */}
     </main>
   );
 }

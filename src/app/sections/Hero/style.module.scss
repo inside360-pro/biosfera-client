@@ -2,7 +2,6 @@
 // @use "../../mixins" as *;
 @use "@app/mixins" as *;
 
-
 .hero_wrapper {
     position: relative;
     max-width: 1740px;
@@ -141,7 +140,7 @@
     z-index: 9999;
 
     @media(max-width: 560px) {
-        bottom: 20px;
+        bottom: 20%;
         left: 20px;
         max-width: 90%;
     }
@@ -161,7 +160,12 @@
     }
 
     p {
+        @include adaptiv-value("font-size", 18, 14);
         color: var(--color-gray);
+    }
+
+    @media(max-width: 560px) {
+        gap: 10px;
     }
 }
 

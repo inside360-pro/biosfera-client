@@ -4,6 +4,7 @@
 
 .form {
     h2 {
+        color: #171717;
         margin-bottom: 20px;
         @include adaptiv-value("font-size", 40, 26);
     }

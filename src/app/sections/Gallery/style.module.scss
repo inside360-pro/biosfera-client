@@ -16,6 +16,9 @@
     background-size: cover;
     background-position: center;
 
+    @media (max-width: 768px) {
+        margin: 30px 20px;
+    }
 }
 
 .gallery__wrapper {}
@@ -33,7 +36,7 @@
 
     p {
         font-weight: 600;
-        font-size: 18px;
+        @include adaptiv-value("font-size", 18, 12);
         color: var(--text-gray);
         max-width: 525px;
     }

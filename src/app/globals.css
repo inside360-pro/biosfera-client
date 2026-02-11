@@ -7,12 +7,11 @@
   10px - font-size: 0.625rem;
 */
 
-
 :root {
   --foreground: #171717;
   --background: #ffffff;
-  --gradient: linear-gradient(to right, #3170B4, #5CCCC2);
-  --button-gradient: linear-gradient(to right, #3170B4, #5CCCC2);
+  --gradient: linear-gradient(to right, #3170b4, #5cccc2);
+  --button-gradient: linear-gradient(to right, #3170b4, #5cccc2);
   --button-border: transparent;
   --transition: 0.3s ease;
 
@@ -26,24 +25,24 @@
   --text-gray: #858f9c;
 
   /* Переменные для плагина */
-  --light-yellow: #F7F3D6;
-  --light-green: #3B2716;
+  --light-yellow: #f7f3d6;
+  --light-green: #3b2716;
   --black: #191830;
   --black-toggle: #191830;
   --dark-blue: #282646;
-  --white: #FFFFFF;
-  --gray: #EBEEF8;
+  --white: #ffffff;
+  --gray: #ebeef8;
   --dark-gray: #e4e8f5;
-  --light-blue: #37A4DA;
-  --yellow: #FCCC05;
-  --green: #29A55C;
-  --violet: #433C8C;
+  --light-blue: #37a4da;
+  --yellow: #fccc05;
+  --green: #29a55c;
+  --violet: #433c8c;
   --violet2: #474092;
-  --purple: #7B1FA2;
-  --orange: #FFB236;
+  --purple: #7b1fa2;
+  --orange: #ffb236;
   --slate-gray: #757f99;
-  --violet-gradient: linear(from(#433C8C) to (#625AB6));
-  --purple-gradient: linear(from(#7B1FA2) to (#A340CD));
+  --violet-gradient: linear(from(#433c8c) to(#625ab6));
+  --purple-gradient: linear(from(#7b1fa2) to(#a340cd));
 }
 
 html,

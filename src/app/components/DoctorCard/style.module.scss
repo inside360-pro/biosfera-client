@@ -10,6 +10,10 @@
     justify-content: space-between;
     gap: 10px;
     height: 100%;
+
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
 }
 
 .doctors__card_info {
@@ -24,14 +28,23 @@
     border-radius: 67px;
     background-color: var(--background);
     width: fit-content;
+
+    @media (max-width: 768px) {
+        padding: 5px 10px;
+    }
 }
 
 .label_info {
-    font-size: 0.75rem;
+    @include adaptiv-value("font-size", 14, 8);
+}
+
+.card_title {
+    @include adaptiv-value("font-size", 20, 10);
+    font-weight: 700;
 }
 
 .card_subtitle {
-    font-size: 1.125rem;
+    @include adaptiv-value("font-size", 18, 10);
     color: var(--text-gray);
 }
 
@@ -52,4 +65,10 @@
     font-weight: 700;
     margin-top: 20px;
     text-align: center;
+
+    @media (max-width: 768px) {
+        padding: 10px 15px;
+        font-size: 9px;
+        margin-top: 10px;
+    }
 }

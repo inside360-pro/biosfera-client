@@ -1,7 +1,7 @@
 @use "@app/mixins" as *;
 
 .services {
-    @include adaptiv-value("margin-top", 100, 50);
+    @include adaptiv-value("margin-top", 100, 30);
 }
 
 .services_wrapper {
@@ -49,7 +49,8 @@
 }
 
 .services_item {
-    border-radius: 10px;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .services_item_link {
@@ -78,12 +79,9 @@
         .services_item_svg_path_2 {
             stroke: #FFFEFE;
         }
-    }
 
-    svg {
-        @media (max-width: 560px) {
-            width: 60px;
-            height: 50px;
+        .services_item_image {
+            transform: scale(1.05);
         }
     }
 }
@@ -93,12 +91,21 @@
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition);
+    border-radius: 20px;
 }
 
 .services_item_svg {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -1px;
+    right: -1px;
+    z-index: 2;
+
+    svg {
+        @media (max-width: 560px) {
+            width: 60px;
+            height: 50px;
+        }
+    }
 }
 
 .services_item_title {

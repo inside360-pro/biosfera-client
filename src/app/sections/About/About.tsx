@@ -1,9 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
 
-import styles from "./style.module.scss";
 import Image from "next/image";
-import { Popup } from "@/app/components";
+import { AnimateElement } from "@/app/components";
+import styles from "./style.module.scss";
 
 export default function About() {
   return (
@@ -54,15 +53,17 @@ export default function About() {
             />
           </li>
           <li className={`${styles.about__item} ${styles.about__item_info}`}>
-            <h2>Центр здоровья и&nbsp;инноваций</h2>
-            <p>
+            <AnimateElement element="h2">
+              Центр здоровья и&nbsp;инноваций
+            </AnimateElement>
+            <AnimateElement element="p" animationDelay={100}>
               Мы — медицинский центр, который ставит вашего здоровья и комфорт
               на первое место. Объединяя высококвалифицированных специалистов с
               передовыми технологиями, мы предлагаем вам качественное
               обслуживание. В нашем центре нет стандартных решений — мы работаем
               для того, чтобы каждый пациент получил необходимое и своевременное
               лечение.
-            </p>
+            </AnimateElement>
             <Image
               className={styles.about__item_info_img}
               src={"/images/info.webp"}

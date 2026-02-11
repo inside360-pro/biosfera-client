@@ -1,39 +1,45 @@
 .btn_prev,
 .btn_next {
-    border-radius: 50%;
-    border: none;
-    height: 60px;
-    width: 60px;
-    text-align: center;
-    cursor: pointer;
-    background-color: #5cccc2;
+  border-radius: 50%;
+  border: none;
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #5cccc2;
+  transition: background-color 0.3s ease;
 
-    @media (max-width: 768px) {
-        height: 40px;
-        width: 40px;
-    }
+  @media (max-width: 768px) {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.btn_prev:hover,
+.btn_next:hover {
+  background-color: #3170b4;
 }
 
 .swiper_nav_btns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 1;
 }
 
 .buttons_bottom {
-    z-index: 1;
-    margin-top: 30px;
+  z-index: 1;
+  margin-top: 30px;
 
-    @media (max-width: 768px) {
-        margin-top: 20px;
-    }
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
 }
 
 .swiper_nav_btns button,
 .swiper_nav_btns button svg,
 .swiper_nav_btns button path,
 .swiper_nav_btns button rect {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }

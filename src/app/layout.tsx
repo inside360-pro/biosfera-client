@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import "./nebo.css";
+
+// import "./nebo.css"; тут пока не используется
 
 const Involve = localFont({
   src: [
