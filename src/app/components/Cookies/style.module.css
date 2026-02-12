@@ -1,0 +1,88 @@
+.popup {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
+    z-index: 100000;
+
+    opacity: 0;
+    visibility: hidden;
+    color: var(--black);
+
+    max-width: 335px;
+
+    box-shadow: 0 0 30px 0 rgba(35, 37, 39, 0.2);
+}
+
+
+.popup_active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.button {
+    border: none;
+    background: linear-gradient(90deg, #3170b4 0%, #5cccc2 100%);
+    color: var(--white);
+    text-transform: uppercase;
+    cursor: pointer;
+
+    font-weight: 500;
+    font-size: 16px;
+
+    border-radius: 101px;
+    padding: 12px 30px;
+}
+
+.button_cancel {
+    color: var(--black);
+    text-transform: uppercase;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: var(--white);
+
+    border: 1px solid var(--black);
+    border-radius: 101px;
+    padding: 12px 30px;
+}
+
+.link {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.button_wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1023px) {
+    .popup {
+        left: 20px;
+    }
+}
+
+@media (max-width: 1023px) {
+    .popup {
+        left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .popup {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+    }
+}
+
+@media (max-width: 560px) {
+    .popup {
+        bottom: 20px;
+    }
+}

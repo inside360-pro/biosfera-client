@@ -2,7 +2,7 @@ export default async function fetchData<T = unknown>(url: string): Promise<T> {
   const domain = `${process.env.NEXT_PUBLIC_API_SERVER}`;
   try {
     const response = await fetch(domain + url, {
-      next: { revalidate: 600 },
+      next: { revalidate: 30 },
     });
 
     if (!response.ok) {

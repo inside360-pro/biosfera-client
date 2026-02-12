@@ -1,6 +1,9 @@
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Footer } from "./sections";
+import { Header } from "./components";
+import type { Metadata } from "next";
+import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 
 // import "./nebo.css"; тут пока не используется
 
@@ -20,6 +23,16 @@ export const metadata: Metadata = {
   description: "Биосфера ДВ",
 };
 
+const openGraph: OpenGraph = {
+  title: "Биосфера ДВ",
+  description: "Биосфера ДВ - забота о вашем здоровье на всех этапах",
+  images: ["/logo.svg"],
+  url: "https://biosphera.ru",
+  siteName: "Биосфера ДВ",
+  locale: "ru_RU",
+  type: "website",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +41,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={Involve.variable}>
+        <Header />
         {children}
+        <Footer />
         <div
           id="medflexRoundWidgetData"
           data-src="https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&isRoundWidget=true"

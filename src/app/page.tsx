@@ -7,16 +7,13 @@ import {
   News,
   Owner,
   Map,
-  Footer,
 } from "./sections";
-import { AnimateElement, Header } from "./components";
-import Image from "next/image";
 
 import styles from "./page.module.css";
+
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Header />
       <Hero />
       <Services />
       <About />
@@ -25,7 +22,6 @@ export default function Home() {
       <Doctors />
       <News />
       <Map />
-      <Footer />
 
       {/* <Image
         src="/Item.png"

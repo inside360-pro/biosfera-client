@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./style.module.scss";
-import { Popup } from "@/app/components";
+import { Cookies, Popup } from "@/app/components";
 
 import { usePopupStore } from "@/app/store/popupStore";
 
@@ -225,6 +225,7 @@ export default function Footer() {
       </div>
 
       <Popup active={popupOpened} setActive={togglePopupState} />
+      <Cookies />
     </footer>
   );
 }
