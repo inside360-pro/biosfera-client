@@ -25,9 +25,9 @@ const data = [
   {
     id: 3,
     name: "Сипрашвили Дарья Андреевна",
-    image: "",
-    label: "Стаж 25 лет",
-    description: "Главный врач, Врач функциональной диагностики, Врач-терапевт",
+    image: "/images/doctors/image-3.jpg",
+    label: "Стаж 3 года",
+    description: "Эндокринолог",
     link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1095027&source=4",
   },
   {
@@ -45,6 +45,14 @@ const data = [
     label: "Стаж 14 лет",
     description: "Врач-неврологт",
     link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1351198&source=4",
+  },
+  {
+    id: 6,
+    name: "Сипрашвили Дарья Андреевна",
+    image: "/images/doctors/image-3.jpg",
+    label: "Стаж 3 года",
+    description: "Эндокринолог",
+    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1095027&source=4",
   },
 ];
 

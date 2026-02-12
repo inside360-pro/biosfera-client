@@ -14,7 +14,7 @@ const menuLinks = [
       { title: "Диагностика", url: "#" },
     ],
   },
-  { title: "Цены", url: "#" },
+  { title: "Цены", url: "/price" },
   { title: "Врачи", url: "#" },
   { title: "Акции ", url: "#" },
   { title: "Новости", url: "#" },
