@@ -7,7 +7,7 @@ import styles from "./style.module.scss";
 const menuLinks = [
   {
     title: "Услуги",
-    url: "/services",
+    url: "#",
     submenu: [
       { title: "Терапия", url: "#" },
       { title: "Неврология", url: "#" },

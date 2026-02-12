@@ -1,9 +1,19 @@
 "use client";
-import { ContentRenderer } from "@/app/components";
-import type { PolicyPageData } from "./types";
 
-export default function ContentPage({ data }: { data: PolicyPageData }) {
+import Script from "next/script";
+
+export default function ContentPage() {
   return (
-    <>{data.data.content && <ContentRenderer content={data.data.content} />}</>
+    <>
+      <div
+        id="medflexPricesWidgetData"
+        data-src="https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44"
+      />
+      <Script
+        src="https://booking.medflex.ru/components/prices/prices_widget.js"
+        strategy="afterInteractive"
+        charSet="utf-8"
+      />
+    </>
   );
 }

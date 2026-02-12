@@ -3,7 +3,7 @@ import "./globals.css";
 import { Footer } from "./sections";
 import { Header } from "./components";
 import type { Metadata } from "next";
-import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
+import Script from "next/script";
 
 // import "./nebo.css"; тут пока не используется
 
@@ -46,12 +46,12 @@ export default function RootLayout({
         <div
           id="medflexRoundWidgetData"
           data-src="https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&isRoundWidget=true"
-        ></div>{" "}
-        <script
-          defer
+        />
+        <Script
           src="https://booking.medflex.ru/components/round/round_widget_button.js"
+          strategy="afterInteractive"
           charSet="utf-8"
-        ></script>
+        />
       </body>
     </html>
   );
