@@ -19,13 +19,14 @@ const Involve = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://biosphera.ru"),
   title: "Биосфера ДВ",
   description: "Биосфера ДВ",
   openGraph: {
     title: "Биосфера ДВ",
     description: "Биосфера ДВ - забота о вашем здоровье на всех этапах",
     images: ["/logo.svg"],
-    url: "https://biosphera.ru",
+    url: "/",
     siteName: "Биосфера ДВ",
     locale: "ru_RU",
     type: "website",

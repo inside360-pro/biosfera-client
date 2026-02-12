@@ -108,7 +108,8 @@ export default function Header() {
           <div className={styles.header_social}>
             <button
               className={styles.item__button}
-              title="Личный кабинет"
+              // title="Личный кабинет"
+              title="Недоступно в текущей версии"
               type="button"
             >
               <Image
@@ -128,8 +129,9 @@ export default function Header() {
               type="button"
               className={styles.item__button}
               ref={buttonRef}
-              onClick={() => setSearchOpened(!searchOpened)}
-              title="Поиск"
+              // onClick={() => setSearchOpened(!searchOpened)}
+              // title="Поиск"
+              title="Недоступно в текущей версии"
             >
               <Image
                 src="/icons/search-icon.svg"
