@@ -8,7 +8,7 @@ export const metadata = {
   description: "Публичная оферта для сайта Биосфера ДВ",
 };
 
-const apiUrl = `api/stranicza-publichnaya-oferta?populate=*`;
+const apiUrl = `/api/stranicza-publichnaya-oferta?populate=*`;
 
 export default async function Policy() {
   let data: PolicyPageData | null = null;

@@ -8,7 +8,7 @@ export const metadata = {
   description: "Политика конфиденциальности для сайта Биосфера ДВ",
 };
 
-const apiUrl = `api/stranicza-politika-konfidenczialnosti?populate=*`;
+const apiUrl = `/api/stranicza-politika-konfidenczialnosti?populate=*`;
 
 export default async function Policy() {
   let data: PolicyPageData | null = null;

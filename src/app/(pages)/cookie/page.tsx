@@ -8,7 +8,7 @@ export const metadata = {
   description: "Политика использования файлов cookie для сайта Биосфера ДВ",
 };
 
-const apiUrl = `api/stranicza-cookie?populate=*`;
+const apiUrl = `/api/stranicza-cookie?populate=*`;
 
 export default async function Policy() {
   let data: PolicyPageData | null = null;

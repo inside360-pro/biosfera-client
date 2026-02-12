@@ -8,7 +8,7 @@ export const metadata = {
   description: "Пользовательское соглашение для сайта Биосфера ДВ",
 };
 
-const apiUrl = `api/stranicza-polzovatelskoe-soglashenie?populate=*`;
+const apiUrl = `/api/stranicza-polzovatelskoe-soglashenie?populate=*`;
 
 export default async function Policy() {
   let data: PolicyPageData | null = null;
