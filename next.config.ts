@@ -15,6 +15,15 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "localhost",
       },
+      {
+        protocol: "https",
+        hostname: "biosfera25.ru",
+      },
+      {
+        protocol: "http",
+        hostname: "130.49.148.45",
+        port: "1337",
+      },
     ],
   },
 };

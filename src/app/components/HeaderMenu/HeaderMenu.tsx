@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 const menuLinks = [
   {
     title: "Услуги",
-    url: "#",
+    url: "/services",
     submenu: [
       { title: "Терапия", url: "#" },
       { title: "Неврология", url: "#" },
@@ -19,7 +19,7 @@ const menuLinks = [
   { title: "Акции ", url: "#" },
   { title: "Новости", url: "#" },
   { title: "О центре", url: "#" },
-  { title: "Контакты", url: "#" },
+  { title: "Контакты", url: "/contacts" },
 ];
 
 export default function HeaderMenu() {

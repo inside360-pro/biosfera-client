@@ -6,15 +6,19 @@ import { AnimateElement } from "@/app/components";
 import styles from "./style.module.scss";
 
 const servicesList = [
-  { image: "/images/services-1.webp", title: "Терапия", link: "#" },
+  {
+    image: "/images/services-1.webp",
+    title: "Терапия",
+    link: "#",
+  },
   { image: "/images/services-2.webp", title: "Неврология", link: "#" },
   { image: "/images/services-3.webp", title: "Эндокринология", link: "#" },
   { image: "/images/services-4.webp", title: "Диагностика", link: "#" },
 ];
 
-export default function Services() {
+export default function Services({ className }: { className?: string }) {
   return (
-    <section className={styles.services} id="services">
+    <section className={`${styles.services} ${className}`} id="services">
       <div className="container">
         <div className={styles.services_wrapper}>
           <div className={styles.services__header}>

@@ -13,3 +13,8 @@ export { default as HeaderMenu } from "./HeaderMenu/HeaderMenu";
 export { default as HeaderMobileMenu } from "./HeaderMobileMenu/HeaderMobileMenu";
 export { default as ContentRenderer } from "./ContentRenderer/ContentRenderer";
 export { default as Cookies } from "./Cookies/Cookies";
+export { default as Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
+export { default as Accordion } from "./Accordion/Accordion";
+export { default as CostItem } from "./CostItem/CostItem";
+export { default as SliderServices } from "./SliderServices/SliderServices";
+export { default as Metrika } from "./Metrika/Metrika";

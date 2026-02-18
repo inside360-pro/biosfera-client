@@ -16,7 +16,7 @@ async function sendEmail(body) {
       from: process.env.SMTP_FROM,
       // from: 'no-replay@dubrovinastom.ru',
       // через запятую в TO добавить еще почты
-      to: `${process.env.SMTP_FROM}, biosfera_dv@mail.ru`,
+      to: `${process.env.SMTP_FROM}, info.biosfera_dv@mail.ru`,
       subject: "Форма с сайта https://biosfera25.ru/",
       text: `Имя: ${body.name}\nТелефон: ${body.phone}`,
       html: `<b>Имя:</b> ${body.name}<br><b>Телефон:</b> ${body.phone}`,

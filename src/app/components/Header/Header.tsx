@@ -10,6 +10,7 @@ import {
   HeaderMobileMenu,
 } from "@/app/components";
 import { usePopupStore } from "@/app/store/popupStore";
+import Script from "next/script";
 
 export default function Header() {
   const [panel, setPanel] = useState(false);
@@ -86,7 +87,7 @@ export default function Header() {
             <p>Пр-т 100-летия Владивостока, 84а</p>
           </div>
 
-          <a href="tel:+79243388189" className={styles.phone_link}>
+          <a href="tel:+79247229970" className={styles.phone_link}>
             <Image
               src="/icons/phone.svg"
               className="dsv-image"
@@ -94,7 +95,7 @@ export default function Header() {
               width={22}
               height={22}
             />
-            <span>+7 (924) 338-81-89</span>
+            <span>+7 (924) 722-99-70</span>
           </a>
 
           <button
@@ -106,20 +107,32 @@ export default function Header() {
           </button>
 
           <div className={styles.header_social}>
-            <button
-              className={styles.item__button}
-              // title="Личный кабинет"
-              title="Недоступно в текущей версии"
-              type="button"
-            >
-              <Image
-                src="/icons/account-icon.svg"
-                className="dsv-image"
-                alt="logo"
-                width={22}
-                height={22}
-              />
-            </button>
+            {/* <button
+                className={styles.item__button}
+                // title="Личный кабинет"
+                title="Недоступно в текущей версии"
+                type="button"
+              >
+                <Image
+                  src="/icons/account-icon.svg"
+                  className="dsv-image"
+                  alt="logo"
+                  width={22}
+                  height={22}
+                />
+              </button> */}
+            <div className={styles.medtochka_button_wrapper}>
+              <div
+                title="Личный кабинет Медточка"
+                id="medflexMedtochkaWidgetButton"
+                data-src="https://booking.medflex.ru/?user=be54557cf76e37ed7e2b8308eecb3e44"
+              ></div>
+              <Script
+                defer
+                src="https://booking.medflex.ru/components/medtochka-button/medtochka-widget-button.js"
+                charSet="utf-8"
+              ></Script>
+            </div>
 
             {panelBtn && (
               <VdsButton setPanel={setPanel} setPanelBtn={setPanelBtn} />

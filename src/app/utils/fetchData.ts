@@ -1,7 +1,12 @@
 export default async function fetchData<T = unknown>(url: string): Promise<T> {
-  const domain = `${process.env.NEXT_PUBLIC_API_SERVER}`;
+  const domain = process.env.NEXT_PUBLIC_API_SERVER;
+  if (!domain) {
+    throw new Error("NEXT_PUBLIC_API_SERVER не задан");
+  }
+
+  const fullUrl = new URL(url, domain).toString();
   try {
-    const response = await fetch(domain + url, {
+    const response = await fetch(fullUrl, {
       next: { revalidate: 30 },
     });
 

@@ -14,7 +14,7 @@ export default function Hero() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setMiniPopupClosed(false);
-    }, 2000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);

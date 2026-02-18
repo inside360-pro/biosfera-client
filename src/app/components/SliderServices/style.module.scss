@@ -1,0 +1,14 @@
+// @include adaptiv-value("font-size", 16, 13);
+// @use "../../mixins" as *;
+@use "@app/mixins" as *;
+
+
+
+.image_wrapper {
+
+    img {
+        width: 100%;
+        height: 10%;
+        object-fit: cover;
+    }
+}

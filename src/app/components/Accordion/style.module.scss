@@ -1,0 +1,74 @@
+@use '@/app/mixins' as *;
+
+// @include adaptiv-value("margin-top", 100, 30);
+
+.accordion__item {
+    margin-bottom: 20px;
+}
+
+.accordion__item_button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    border-radius: 1000px;
+    padding: 10px 11px 10px 40px;
+    font-weight: 600;
+    font-family: inherit;
+
+    span {
+        text-align: left;
+    }
+
+    @include adaptiv-value("font-size", 24, 16);
+    transition: color var(--transition);
+
+    .accordion__item_icon svg {
+        transition: transform var(--transition);
+    }
+
+    @media (max-width: 768px) {
+        padding: 10px 20px;
+
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
+
+.active_button {
+    color: var(--color-blue);
+
+
+    .accordion__item_icon svg {
+        transform: rotate(45deg);
+    }
+}
+
+
+.accordion__item_content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    will-change: max-height;
+    transition: all var(--transition);
+    box-sizing: border-box;
+
+    &.isActive {
+        opacity: 1;
+    }
+
+}
+
+.accordion__item_content_inner {
+    padding: 20px 30px;
+    box-sizing: border-box;
+
+    @media (max-width: 560px) {
+        padding: 10px 20px;
+    }
+}

@@ -44,9 +44,8 @@ export default function Map() {
                   <button
                     key={tab.id}
                     type="button"
-                    className={`${styles.map__tab} ${
-                      activeTab === tab.id ? styles.map__tab_active : ""
-                    }`}
+                    className={`${styles.map__tab} ${activeTab === tab.id ? styles.map__tab_active : ""
+                      }`}
                     onClick={() => setActiveTab(tab.id)}
                   >
                     {tab.label}
@@ -116,7 +115,7 @@ export default function Map() {
                       className={styles.map__contact_icon}
                     />
                     <div>
-                      <a href="tel:+79243388189">+7 (924) 338-81-89</a>
+                      <a href="tel:+79247229970">+7 (924) 722-99-70</a>
                       <button
                         type="button"
                         className={styles.map__contact_link}

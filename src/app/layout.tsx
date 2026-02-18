@@ -1,8 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { Footer } from "./sections";
-import { Header } from "./components";
+import { Header, Metrika } from "./components";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Script from "next/script";
 
 // import "./nebo.css"; тут пока не используется
@@ -41,6 +42,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={Involve.variable}>
+        <Suspense>
+          <Metrika />
+        </Suspense>
         <Header />
         {children}
         <Footer />
