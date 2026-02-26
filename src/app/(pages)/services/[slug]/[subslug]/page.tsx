@@ -3,10 +3,6 @@ import fetchData from "@/app/utils/fetchData";
 import ContentPage from "./ContentPage";
 import { notFound } from "next/navigation";
 
-type ServicesPageResponse = {
-  data?: Array<Record<string, unknown>> | null;
-};
-
 type ServicesMetadata = {
   data: {
     meta_title: string;
@@ -15,14 +11,18 @@ type ServicesMetadata = {
   }[];
 };
 
+type ServicesPageResponse = {
+  data?: Array<Record<string, unknown>> | null;
+};
+
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; subslug: string }>;
 }) {
-  const { slug } = await params;
+  const { subslug } = await params;
   const page = (await fetchData(
-    `/api/shablon-uslugis?filters[slug][$eq]=${encodeURIComponent(slug)}`,
+    `/api/shablon-pod-uslugas?filters[slug][$eq]=${encodeURIComponent(subslug)}`,
   )) as ServicesMetadata;
   return {
     title: `Биосфера ДВ - ${page?.data?.[0]?.meta_title}`,
@@ -38,19 +38,17 @@ export async function generateMetadata({
 export default async function ServicesPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; subslug: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, subslug } = await params;
 
   const url =
-    `/api/shablon-uslugis?filters[slug][$eq]=${encodeURIComponent(slug)}` +
+    `/api/shablon-pod-uslugas?filters[slug][$eq]=${encodeURIComponent(subslug)}` +
     `&populate[prices][populate]=*` +
-    `&populate[services_slider][populate]=*` +
-    `&populate[items][populate]=*` +
     `&populate[section][populate]=*` +
+    `&populate[how][populate]=*` +
     `&populate[faq][populate]=*` +
     `&populate[seo_block][populate]=*` +
-    `&populate[gallery][populate]=*` +
     `&populate[hero_background][populate]=*`;
 
   const page = await fetchData<ServicesPageResponse>(url);
@@ -59,16 +57,24 @@ export default async function ServicesPage({
     return notFound();
   }
 
+  const fourthLabel =
+    (typeof (page.data[0] as any)?.meta_title === "string" &&
+      (page.data[0] as any)?.meta_title) ||
+    (typeof (page.data[0] as any)?.hero_title === "string" &&
+      (page.data[0] as any)?.hero_title) ||
+    undefined;
+
   return (
     <main>
       <div className="container">
         <Breadcrumbs
           secondLink="/services"
           secondLabel="Услуги"
+          thirdLink={`/services/${encodeURIComponent(slug)}`}
           thirdLabel="Терапия"
+          fourthLabel={fourthLabel}
         />
       </div>
-      <h1 className="visually-hidden">Терапия</h1>
       <ContentPage data={page} />
     </main>
   );

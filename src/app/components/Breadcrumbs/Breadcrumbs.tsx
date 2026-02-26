@@ -7,14 +7,21 @@ import styles from "./style.module.scss";
 interface BreadcrumbsProps {
   secondLink?: string;
   secondLabel?: string;
+  thirdLink?: string;
   thirdLabel?: string;
+  fourthLabel?: string;
 }
 
 const Breadcrumbs: FC<BreadcrumbsProps> = ({
   secondLink = "/",
   secondLabel,
+  thirdLink,
   thirdLabel,
+  fourthLabel,
 }) => {
+  const resolvedThirdLabel = thirdLabel ?? (fourthLabel ? fourthLabel : undefined);
+  const resolvedFourthLabel = thirdLabel ? fourthLabel : undefined;
+
   return (
     <nav className={styles.breadcrumbs}>
       <ul>
@@ -23,18 +30,31 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
         </li>
         {secondLabel && (
           <li className={styles.crumb}>
-            {thirdLabel ? (
+            {resolvedThirdLabel ? (
               <Link href={secondLink}>{secondLabel}</Link>
             ) : (
               <span className={styles.active}>{secondLabel}</span>
             )}
           </li>
         )}
-        {thirdLabel && (
+        {resolvedThirdLabel && (
+          <li className={styles.crumb}>
+            {resolvedFourthLabel ? (
+              thirdLink ? (
+                <Link href={thirdLink}>{resolvedThirdLabel}</Link>
+              ) : (
+                <span>{resolvedThirdLabel}</span>
+              )
+            ) : (
+              <span className={styles.active}>{resolvedThirdLabel}</span>
+            )}
+          </li>
+        )}
+        {resolvedFourthLabel && (
           <li
             className={`${styles.crumb} ${styles.active} ${styles.lastCrumb}`}
           >
-            <span>{thirdLabel}</span>
+            <span>{resolvedFourthLabel}</span>
           </li>
         )}
       </ul>

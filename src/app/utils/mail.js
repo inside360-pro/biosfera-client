@@ -19,7 +19,12 @@ async function sendEmail(body) {
       to: `${process.env.SMTP_FROM}, info.biosfera_dv@mail.ru`,
       subject: "Форма с сайта https://biosfera25.ru/",
       text: `Имя: ${body.name}\nТелефон: ${body.phone}`,
-      html: `<b>Имя:</b> ${body.name}<br><b>Телефон:</b> ${body.phone}`,
+      html: `
+      <b>Имя:</b> ${body.name}<br>
+      <b>Телефон:</b> ${body.phone}<br>
+      ${body.question ? `<b>Сообщение:</b> ${body.question}<br>` : ''}
+      `
+      ,
     });
 
     // console.log("Message sent: %s", info.messageId);

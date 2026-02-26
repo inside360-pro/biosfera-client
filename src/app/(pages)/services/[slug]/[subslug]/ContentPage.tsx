@@ -4,17 +4,16 @@ import {
   AnimateElement,
   ContentRenderer,
   CostItem,
-  SliderServices,
 } from "@/app/components";
 import { usePopupStore } from "@/app/store/popupStore";
-import styles from "./style.module.scss";
 import type {
   CostItemType,
   SliderItemType,
   IncludesItemType,
 } from "@/app/types";
 import Accordion from "@/app/components/Accordion/Accordion";
-import Gallery from "@/app/sections/Gallery/Gallery";
+
+import styles from "../style.module.scss";
 
 export interface SliderProps {
   items: SliderItemType[];
@@ -28,17 +27,16 @@ export default function ContentPage({ data }: { data: any }) {
   const { togglePopupState } = usePopupStore();
   const hero = data?.data?.[0];
   const prices = data?.data?.[0]?.prices?.[0]?.item;
-  const slider_items = data?.data?.[0]?.services_slider;
-  const includes_list = data?.data?.[0]?.items;
-  const recomendations = data?.data?.[0]?.section;
   const faq = data?.data?.[0]?.faq;
   const seo_block = data?.data?.[0]?.seo_block;
-  const gallery = data?.data?.[0]?.gallery;
+  const recomendations = data?.data?.[0]?.section;
+  const how = data?.data?.[0]?.how;
 
-  const showGallery = data?.data?.[0]?.show_gallery;
+  console.log("how", how);
 
   return (
     <>
+      <h1 className="visually-hidden">{hero?.hero_title}</h1>
       <section className={`${styles.services__hero} ${styles.section}`}>
         <div className={styles.services__hero_image}>
           <Image
@@ -102,38 +100,9 @@ export default function ContentPage({ data }: { data: any }) {
           </header>
 
           <ul className={styles.costs__list}>
-            {prices.map((item: CostItemType) => (
+            {prices?.map((item: CostItemType) => (
               <CostItem key={item.id} data={item} />
             ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className={`${styles.slider_services} ${styles.section}`}>
-        <SliderServices items={(slider_items ?? []) as SliderItemType[]} />
-      </section>
-
-      <section className={`${styles.includes} ${styles.section}`}>
-        <div className="container">
-          <header className={styles.includes__header}>
-              <h2 className={styles.includes__title} dangerouslySetInnerHTML={{ __html: data?.data?.[0]?.includes_title ?? "" }}></h2>
-            <p>{data?.data?.[0]?.includes_description ?? ""}</p>
-          </header>
-
-          <ul className={`${styles.includes__list}`}>
-            {(includes_list ?? []).map((item: IncludesItemType) => {
-              const number = includes_list.indexOf(item) + 1;
-              return (
-                <li className={styles.includes__item} key={item.id}>
-                  <span
-                    className={`${styles.includes__item_number} text-gradient`}
-                  >
-                    {number}
-                  </span>
-                  <p>{item?.title ?? ""}</p>
-                </li>
-              );
-            })}
           </ul>
         </div>
       </section>
@@ -181,7 +150,29 @@ export default function ContentPage({ data }: { data: any }) {
         </div>
       </section>
 
-      {showGallery && gallery?.length > 0 && <Gallery images={gallery ?? []} />}
+      <section className={`${styles.section} ${styles.how}`}>
+        <div className={styles.how_background}>
+          <div className="container">
+            <h2 className={styles.secton_title} dangerouslySetInnerHTML={{ __html: how?.title ?? "" }}></h2>
+            <div className={styles.how_content__wrapper}>
+              <div className={styles.recomendations__image}>
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_API_SERVER}${how?.image?.url}`}
+                    alt={data?.data?.[0]?.how?.alt ?? "alt text"}
+                    width={528}
+                    height={375}
+                    className="dsv-image"
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MiIgaGVpZ2h0PSIxMTg5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNjY2MiIC8+PC9zdmc+"
+                  />
+              </div>
+              <div className={styles.how_content__text}>
+                <ContentRenderer content={how?.content ?? []} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className={styles.section}>
         <div className="container">

@@ -1,8 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./style.module.scss";
 import Image from "next/image";
-import Link from "next/link";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -14,17 +13,14 @@ import "swiper/css/navigation";
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
 
-const imageList = [
-  { url: "/images/slide-1.webp" },
-  { url: "/images/slide-2.webp" },
-  { url: "/images/slide-3.webp" },
-  { url: "/images/slide-1.webp" },
-  { url: "/images/slide-2.webp" },
-  { url: "/images/slide-3.webp" },
-];
+interface ImageType {
+  id: number;
+  url?: string | null;
+  image?: { url?: string | null } | null;
+}
 
-export default function SliderGallery() {
-  const domain = process.env.NEXT_PUBLIC_DOMAIN;
+export default function SliderGallery({ images }: { images: ImageType[] }) {
+  const domain = process.env.NEXT_PUBLIC_API_SERVER;
 
   useEffect(() => {
     let lightbox = new PhotoSwipeLightbox({
@@ -55,12 +51,12 @@ export default function SliderGallery() {
           1023: { slidesPerView: 3 },
         }}
       >
-        {imageList?.length > 0 ? (
-          imageList.map((item, index) => (
-            <SwiperSlide key={index}>
+        {images?.length > 0 ? (
+          images.map((item: ImageType) => (
+            <SwiperSlide key={item?.id}>
               <div className={styles.image_slide}>
                 <a
-                  href={`${item?.url}`}
+                  href={`${domain}${item?.image?.url}`}
                   data-pswp-width={480 * 2}
                   data-pswp-height={425 * 2}
                   key={"#main-gallery" + "-" + 1}
@@ -70,7 +66,7 @@ export default function SliderGallery() {
                 >
                   <div className={styles.image_wrapper}>
                     <Image
-                      src={`${item?.url}`}
+                      src={`${domain}${item?.image?.url}`}
                       alt="Dubrovina logo"
                       width={480}
                       height={425}

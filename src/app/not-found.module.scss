@@ -1,0 +1,67 @@
+// @include adaptiv-value("font-size", 16, 13);
+// @use "../../mixins" as *;
+@use "@app/mixins" as *;
+
+.notFound {
+    @include adaptiv-value("padding-top", 100, 30);
+    @include adaptiv-value("padding-bottom", 100, 30);
+    margin-bottom: -50px;
+    overflow: hidden;
+
+    @media(max-width:560px) {
+        margin-bottom: 0;
+    }
+}
+
+.notFound__wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    p {
+        font-weight: 700;
+        @include adaptiv-value("font-size", 20, 16);
+        text-align: center;
+        color: #232527;
+        max-width: 450px;
+    }
+}
+
+.image_wrapper {
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.notFound__link {
+    border-radius: 101px;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #3170b4 0%, #5cccc2 100%);
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+}
+
+.image_absolute {
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    z-index: -1;
+
+    @media(max-width: 980px) {
+        width: 300px;
+        height: 225px;
+        bottom: -45px;
+        left: -10px;
+    }
+
+    @media(max-width:560px) {
+        display: none;
+    }
+}

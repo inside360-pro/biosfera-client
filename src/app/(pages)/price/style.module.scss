@@ -6,3 +6,22 @@
     @include adaptiv-value("font-size", 46, 26);
     margin-bottom: 30px;
 }
+
+.price {
+    @include adaptiv-value("margin-top", 100, 50);
+
+    max-width: 1740px;
+    margin: 0 auto;
+    padding: 70px 0;
+    border-radius: 20px;
+
+    background: linear-gradient(186deg, rgba(92, 204, 194, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%);
+
+    @media(max-width: 1740px) {
+        margin: 0 20px;
+    }
+
+    @media(max-width: 560px) {
+        padding: 30px 0;
+    }
+}

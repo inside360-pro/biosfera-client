@@ -11,13 +11,14 @@ export default function Hero() {
   const [miniPopupClosed, setMiniPopupClosed] = useState(true);
   const { togglePopupState } = usePopupStore();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMiniPopupClosed(false);
-    }, 10000);
+  // отключаем мин-попап на время
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setMiniPopupClosed(false);
+  //   }, 10000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   const miniPopupCloseHandler = () => {
     setMiniPopupClosed(true);
@@ -81,9 +82,7 @@ export default function Hero() {
           />
           <p>Врачи, которые разбираются в&nbsp;причине, а не лечат симптомы</p>
         </div>
-        {/* <a className={styles.hero_link} href="#" target="_blank">
-          Записаться онлайн
-        </a> */}
+
         <button
           type="button"
           className={styles.scroll_down_button}
@@ -98,7 +97,8 @@ export default function Hero() {
         </button>
       </div>
 
-      {!miniPopupClosed && (
+      {/* отключаем мин-попап на время */}
+      {/* {!miniPopupClosed && (
         <section className={styles.mini_popup}>
           <button
             type="button"
@@ -124,7 +124,7 @@ export default function Hero() {
             </button>
           </div>
         </section>
-      )}
+      )} */}
     </section>
   );
 }

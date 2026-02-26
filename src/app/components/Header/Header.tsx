@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./style.module.scss";
 import {
   VdsButton,
@@ -21,6 +21,49 @@ export default function Header() {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  const openMedflexRoundWidget = useCallback(() => {
+    const clickWidgetButton = () => {
+      const button = document.querySelector(
+        ".medflex-round-widget__button",
+      ) as HTMLElement | null;
+      if (!button) return false;
+      button.click();
+      return true;
+    };
+
+    if (clickWidgetButton()) return;
+
+    let tries = 0;
+    const maxTries = 20;
+    const intervalMs = 100;
+
+    const timerId = window.setInterval(() => {
+      tries += 1;
+
+      if (clickWidgetButton()) {
+        window.clearInterval(timerId);
+        return;
+      }
+
+      if (tries >= maxTries) {
+        window.clearInterval(timerId);
+
+        const dataEl = document.getElementById("medflexRoundWidgetData");
+        const src = dataEl?.dataset?.src;
+        if (!src) return;
+
+        try {
+          const url = new URL(src);
+          url.searchParams.delete("isRoundWidget");
+          url.searchParams.set("source", "3");
+          window.open(url.toString(), "_blank", "noopener,noreferrer");
+        } catch {
+          window.open(src, "_blank", "noopener,noreferrer");
+        }
+      }
+    }, intervalMs);
+  }, []);
 
   // закрываем поиск при клике вне кнопки и вне области поиска
   useEffect(() => {
@@ -100,27 +143,13 @@ export default function Header() {
 
           <button
             className={styles.primary_button}
-            onClick={togglePopupState}
+            onClick={openMedflexRoundWidget}
             type="button"
           >
             Записаться на прием
           </button>
 
           <div className={styles.header_social}>
-            {/* <button
-                className={styles.item__button}
-                // title="Личный кабинет"
-                title="Недоступно в текущей версии"
-                type="button"
-              >
-                <Image
-                  src="/icons/account-icon.svg"
-                  className="dsv-image"
-                  alt="logo"
-                  width={22}
-                  height={22}
-                />
-              </button> */}
             <div className={styles.medtochka_button_wrapper}>
               <div
                 title="Личный кабинет Медточка"

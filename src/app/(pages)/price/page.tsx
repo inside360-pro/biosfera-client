@@ -15,8 +15,8 @@ export default async function Price() {
         <h1 className={styles.title}>
           <span className="text-gradient">Цены</span> и услуги
         </h1>
-        <ContentPage />
       </div>
+      <ContentPage />
     </main>
   );
 }

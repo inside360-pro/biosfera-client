@@ -66,9 +66,11 @@ export default function ContentPage() {
                     className={styles.map__contact_icon}
                   />
                   <div>
-                    <a href="mailto:biosfera_dv@mail.ru">biosfera_dv@mail.ru</a>
+                    <a href="mailto:info.biosfera_dv@mail.ru">
+                      info.biosfera_dv@mail.ru
+                    </a>
                     <a
-                      href="mailto:biosfera_dv@mail.ru"
+                      href="mailto:info.biosfera_dv@mail.ru"
                       className={`${styles.map__contact_link} text-gradient`}
                     >
                       Написать

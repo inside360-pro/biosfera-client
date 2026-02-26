@@ -9,11 +9,23 @@ const servicesList = [
   {
     image: "/images/services-1.webp",
     title: "Терапия",
-    link: "#",
+    link: "/services/therapy",
   },
-  { image: "/images/services-2.webp", title: "Неврология", link: "#" },
-  { image: "/images/services-3.webp", title: "Эндокринология", link: "#" },
-  { image: "/images/services-4.webp", title: "Диагностика", link: "#" },
+  {
+    image: "/images/services-2.webp",
+    title: "Неврология",
+    link: "/services/nevrologiya",
+  },
+  {
+    image: "/images/services-3.webp",
+    title: "Эндокринология",
+    link: "/services/endokrinologiya",
+  },
+  {
+    image: "/images/services-4.webp",
+    title: "Диагностика",
+    link: "/services/diagnostika",
+  },
 ];
 
 export default function Services({ className }: { className?: string }) {

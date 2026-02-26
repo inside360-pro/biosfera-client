@@ -1,45 +1,8 @@
+import type { NewsItemType } from "@/app/types";
 import styles from "./style.module.scss";
 import { Slider, NewsCard } from "@/app/components";
 
-const data = [
-  {
-    id: 1,
-    title: "Программы для поддержания здоровья в зимний период",
-    image: "/Item.png",
-    label: "1 января 2026",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Программы для поддержания здоровья в зимний период",
-    image: "/Item.png",
-    label: "1 января 2026",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Программы для поддержания здоровья в зимний период",
-    image: "/Item.png",
-    label: "1 января 2026",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "Программы для поддержания здоровья в зимний период",
-    image: "/Item.png",
-    label: "1 января 2026",
-    link: "#",
-  },
-  {
-    id: 5,
-    title: "Программы для поддержания здоровья в зимний период",
-    image: "/images/new-1.webp",
-    label: "1 января 2026",
-    link: "#",
-  },
-];
-
-export default function News() {
+export default function News({ data }: { data: NewsItemType[] }) {
   return (
     <section className={styles.doctors}>
       <div className="container">

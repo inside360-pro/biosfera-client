@@ -2,7 +2,13 @@
 import { AnimateElement, SliderGallery } from "@/app/components";
 import styles from "./style.module.scss";
 
-export default function Gallery() {
+type GalleryImage = {
+  id: number;
+  url?: string | null;
+  image?: { url?: string | null } | null;
+};
+
+export default function Gallery({ images = [] }: { images?: GalleryImage[] }) {
   return (
     <section className={styles.gallery}>
       <div className="container">
@@ -14,7 +20,7 @@ export default function Gallery() {
               чувствует себя уверенно и безопасно
             </AnimateElement>
           </div>
-          <SliderGallery />
+          <SliderGallery images={images} />
         </div>
       </div>
     </section>

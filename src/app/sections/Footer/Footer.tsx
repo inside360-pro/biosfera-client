@@ -11,10 +11,10 @@ const FOOTER_NAV = [
   {
     title: "Услуги",
     links: [
-      { label: "Терапия", href: "#" },
-      { label: "Неврология", href: "#" },
-      { label: "Эндокринология", href: "#" },
-      { label: "Диагностика", href: "#" },
+      { label: "Терапия", href: "/services/therapy" },
+      { label: "Неврология", href: "/services/nevrologiya" },
+      { label: "Эндокринология", href: "/services/endokrinologiya" },
+      { label: "Диагностика", href: "/services/diagnostika" },
     ],
   },
   {
@@ -30,7 +30,7 @@ const FOOTER_NAV = [
     links: [
       { label: "Врачи", href: "#" },
       { label: "Цены", href: "#" },
-      { label: "Акции", href: "#" },
+      { label: "Акции", href: "/promo" },
     ],
   },
   {
