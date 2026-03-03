@@ -10,19 +10,26 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-async function sendEmail(body) {
+async function sendEmailPassport(body) {
   try {
     const info = await transporter.sendMail({
       from: process.env.SMTP_FROM,
       // from: 'no-replay@dubrovinastom.ru',
       // через запятую в TO добавить еще почты
-      to: `${process.env.SMTP_FROM}, info.biosfera_dv@mail.ru`,
-      subject: "Форма с сайта biosfera25.ru",
+      to: `${process.env.SMTP_FROM}`,
+      subject: "biosfera25.ru - Подписание договора",
       text: `Имя: ${body.name}\nТелефон: ${body.phone}`,
       html: `
+      <b>Тип документа:</b> Паспорт<br>
+      <b>Фамилия:</b> ${body.last_name}<br>
       <b>Имя:</b> ${body.name}<br>
+      <b>Отчество:</b> ${body.middle_name}<br>
       <b>Телефон:</b> ${body.phone}<br>
-      ${body.question ? `<b>Сообщение:</b> ${body.question}<br>` : ''}
+      <b>Серия и номер паспорта:</b> ${body.passport_issued_code}<br>
+      <b>Кем выдан:</b> ${body.passport_issued_by}<br>
+      <b>Дата выдачи:</b> ${body.passport_issued_date}<br>
+      <b>Адрес проживания:</b> ${body.address_of_residence}<br>
+      <b>Тип договора:</b> ${body.contract_type}<br>
       `
       ,
     });
@@ -35,4 +42,4 @@ async function sendEmail(body) {
   }
 }
 
-export default sendEmail;
+export default sendEmailPassport;

@@ -28,8 +28,8 @@ const FOOTER_NAV = [
   {
     title: "О центре",
     links: [
-      { label: "Врачи", href: "#" },
-      { label: "Цены", href: "#" },
+      { label: "Врачи", href: "/doctors" },
+      { label: "Цены", href: "/price" },
       { label: "Акции", href: "/promo" },
     ],
   },
@@ -38,7 +38,7 @@ const FOOTER_NAV = [
     links: [
       { label: "Контакты", href: "/contacts" },
       { label: "Отзывы", href: "#" },
-      { label: "Вакансии", href: "#" },
+      { label: "Вакансии", href: "/vacancies" },
     ],
   },
 ];

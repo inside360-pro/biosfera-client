@@ -69,8 +69,13 @@ export default function PriceForm() {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <header className={styles.form__header}>
-        <h2>Есть вопросы?</h2>
-        <p className={styles.subtitle}>Если у вас есть вопрос, предложение или вы хотите обратиться напрямую к главному врачу — заполните форму ниже</p>
+        <h2>
+          Есть <span className="text-gradient">вопросы?</span>
+        </h2>
+        <p className={styles.subtitle}>
+          Если у вас есть вопрос, предложение или вы хотите обратиться напрямую
+          к главному врачу — заполните форму ниже
+        </p>
       </header>
 
       <div className={styles.form__row}>
@@ -116,17 +121,17 @@ export default function PriceForm() {
       </div>
 
       <div className={`${styles.input_wrapper} ${styles.textarea_wrapper}`}>
-               <textarea
-                placeholder="Ваше сообщение"
-                {...register("question", {
-                  required: { value: true, message: "Опишите ваш вопрос" },
-                })}
-                className={styles.form__input}
-                rows={4}
-              />
-          <div className={styles.input_text_error}>
-            {errors["question"] && errors["question"].message}
-          </div>
+        <textarea
+          placeholder="Ваше сообщение"
+          {...register("question", {
+            required: { value: true, message: "Опишите ваш вопрос" },
+          })}
+          className={styles.form__input}
+          rows={4}
+        />
+        <div className={styles.input_text_error}>
+          {errors["question"] && errors["question"].message}
+        </div>
       </div>
 
       <div className={styles.form__row}>
@@ -136,15 +141,16 @@ export default function PriceForm() {
               {...register("policy", {
                 required: {
                   value: true,
-                  message: "Вы должны согласиться с политикой конфиденциальности",
+                  message:
+                    "Вы должны согласиться с политикой конфиденциальности",
                 },
               })}
               type="checkbox"
               className={styles.policy_checkbox}
             />
             <p className={styles.policy_text}>
-              Нажимая кнопку, вы даёте согласие на обработку персональных данных в
-              соответствии с &nbsp;
+              Нажимая кнопку, вы даёте согласие на обработку персональных данных
+              в соответствии с &nbsp;
               <a
                 href="/policy"
                 className={`${styles.policy_text_link} text-gradient`}
@@ -223,10 +229,10 @@ export default function PriceForm() {
         </button>
       </div>
 
-        {isSuccess && (
-          <div className={styles.success}>Ваша заявка успешно отправлена</div>
-        )}
-        {error && <div className={styles.send_error}>{error}</div>}
-      </form>
+      {isSuccess && (
+        <div className={styles.success}>Ваша заявка успешно отправлена</div>
+      )}
+      {error && <div className={styles.send_error}>{error}</div>}
+    </form>
   );
 }

@@ -15,10 +15,11 @@ const menuLinks = [
     ],
   },
   { title: "Цены", url: "/price" },
-  { title: "Врачи", url: "#" },
+  { title: "Врачи", url: "/doctors" },
   { title: "Акции ", url: "/promo" },
+  { title: "Пациентам", url: "/patients" },
   { title: "Новости", url: "/news" },
-  { title: "О центре", url: "#" },
+  { title: "О центре", url: "/about" },
   { title: "Контакты", url: "/contacts" },
 ];
 
