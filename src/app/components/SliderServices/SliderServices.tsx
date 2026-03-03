@@ -14,8 +14,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function SliderServices({ items }: { items: SliderItemType[] }) {
-  console.log(items);
-
   return (
     <div className={`${styles.wrapper}`}>
       <Swiper>

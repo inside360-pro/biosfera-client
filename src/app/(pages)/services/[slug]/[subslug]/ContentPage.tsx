@@ -32,8 +32,6 @@ export default function ContentPage({ data }: { data: any }) {
   const recomendations = data?.data?.[0]?.section;
   const how = data?.data?.[0]?.how;
 
-  console.log("how", how);
-
   return (
     <>
       <h1 className="visually-hidden">{hero?.hero_title}</h1>

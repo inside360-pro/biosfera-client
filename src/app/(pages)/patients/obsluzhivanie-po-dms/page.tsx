@@ -43,7 +43,6 @@ export default async function Patients() {
   }
 
   const data = page?.data;
-  console.log(data);
 
   return (
     <main className="container">

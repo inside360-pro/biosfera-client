@@ -21,6 +21,7 @@ interface ImageType {
 
 export default function SliderGallery({ images }: { images: ImageType[] }) {
   const domain = process.env.NEXT_PUBLIC_API_SERVER;
+  const publicDomain = process.env.NEXT_PUBLIC_DOMAIN;
 
   useEffect(() => {
     let lightbox = new PhotoSwipeLightbox({
@@ -56,7 +57,7 @@ export default function SliderGallery({ images }: { images: ImageType[] }) {
             <SwiperSlide key={item?.id}>
               <div className={styles.image_slide}>
                 <a
-                  href={`${domain}${item?.image?.url}`}
+                  href={`${publicDomain}${item?.image?.url}`}
                   data-pswp-width={480 * 2}
                   data-pswp-height={425 * 2}
                   key={"#main-gallery" + "-" + 1}

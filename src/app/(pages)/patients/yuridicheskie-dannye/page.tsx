@@ -42,7 +42,7 @@ export default async function Patients() {
   }
 
   const data = page?.data;
-  console.log("data", data);
+
   return (
     <main className="container">
       <Breadcrumbs secondLabel={page?.data?.title ?? "Пациентам"} />

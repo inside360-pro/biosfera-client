@@ -57,7 +57,6 @@ export default async function Patients() {
   }
 
   const data = page?.data;
-  console.log("Kontroliruyushchie organi", data);
 
   return (
     <main className="container">

@@ -34,8 +34,6 @@ export default function ContentPage({ data }: { data: any }) {
 
   const { about_section, about_image_l, about_image_s } = data;
 
-  console.log("licenses", licenses);
-
   return (
     <>
       <section className={`${styles.services__hero} ${styles.section}`}>

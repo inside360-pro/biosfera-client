@@ -43,7 +43,6 @@ export default async function Patients() {
   }
 
   const licenses = page?.data;
-  console.log("licenses", licenses);
 
   return (
     <main className="container">
