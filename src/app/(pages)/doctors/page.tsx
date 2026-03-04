@@ -1,12 +1,16 @@
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
-import { Doctors } from "@/app/sections";
-
+import fetchData from "@/app/utils/fetchData";
+import { notFound } from "next/navigation";
 import styles from "./style.module.scss";
 import { DoctorCard } from "@/app/components";
 export const metadata = {
   title: "Биосфера ДВ | Врачи центра ",
   description: "Врачи центра Биосфера ДВ",
 };
+
+type PageResponse = {
+  data?: Array<Record<string, unknown>> | null;
+}
 
 const data = [
   {
@@ -36,6 +40,20 @@ const data = [
 ];
 
 export default async function DoctorsPage() {
+  let page: PageResponse | null = null;
+  const domain = process.env.NEXT_PUBLIC_API_SERVER ?? "";
+
+  try {
+    page = await fetchData<PageResponse>(`/api/vrachis?populate=*`);
+  } catch {
+    return notFound();
+  }
+  if (!page?.data || (Array.isArray(page.data) && page.data.length === 0)) {
+    return notFound();
+  }
+
+  const data = page?.data;
+
   return (
     <div className="container">
       <Breadcrumbs secondLabel="Врачи центра " />
@@ -49,8 +67,8 @@ export default async function DoctorsPage() {
       </p>
 
       <ul className={styles.list}>
-        {data.map((item) => (
-          <li key={item.id} className={styles.item1}>
+        {data && data.length > 0 && data.map((item) => (
+          <li key={item.documentId} className={styles.item1}>
             <DoctorCard data={item} />
           </li>
         ))}

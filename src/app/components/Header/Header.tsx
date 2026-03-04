@@ -171,9 +171,8 @@ export default function Header() {
               type="button"
               className={styles.item__button}
               ref={buttonRef}
-              // onClick={() => setSearchOpened(!searchOpened)}
-              // title="Поиск"
-              title="Недоступно в текущей версии"
+              onClick={() => setSearchOpened(!searchOpened)}
+              title="Поиск"
             >
               <Image
                 src="/icons/search-icon.svg"

@@ -8,13 +8,15 @@ import fetchData from "../../utils/fetchData";
 import styles from "./style.module.scss";
 
 type ResponseItem = {
-  title: string;
+  title?: string;
   link?: string;
   file?: {
     url: string;
   };
   type: string;
   documentId: string;
+  name?: string;
+  slug?: string;
   // сюда дописывать другие поля из API
 };
 
@@ -84,17 +86,17 @@ export default function Search() {
       try {
         // Тут можно добавить другие API источники, добавить в промис и объединить результаты
         const newsUrl = `/api/novostis?filters[title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
-        const tariffsUrl = `/api/tarify-i-normativies?filters[title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
+        const doctorsUrl = `/api/vrachis?filters[name][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
 
-        const [newsResult, tariffsResult] = await Promise.all([
+        const [newsResult, doctorsResult] = await Promise.all([
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           fetchData(newsUrl) as any,
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          fetchData(tariffsUrl) as any,
+          fetchData(doctorsUrl) as any,
         ]);
         const combinedData = [
           ...(newsResult?.data || []),
-          ...(tariffsResult?.data || []),
+          ...(doctorsResult?.data || []),
         ];
         setData(combinedData);
         setLoading(false);
@@ -177,13 +179,16 @@ export default function Search() {
                           </span>
                         </Link>
                       )}
-                      {item.type === "tariff" && (
-                        <Link href={"/rates"} rel="noopener noreferrer">
+                      {item.type === "doctors" && (
+                        <Link
+                          href={`/doctors/${item?.slug}`}
+                          rel="noopener noreferrer">
                           <span className={styles.item_title}>
-                            {highlightText(item?.title, inputValue)}
+                            {highlightText(item?.name, inputValue)}
                           </span>
                         </Link>
-                      )}
+                      )
+                      }
                     </li>
                   );
                 })}
@@ -191,6 +196,6 @@ export default function Search() {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 }

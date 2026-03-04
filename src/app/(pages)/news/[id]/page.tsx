@@ -158,8 +158,8 @@ export default async function Page({
           <div className={styles.list}>
             {recommendedNewsData && recommendedNewsData.length > 0
               ? recommendedNewsData.map((item: NewsItemType) => (
-                  <NewsCard key={item.id} data={item} />
-                ))
+                <NewsCard key={item.id} data={item} />
+              ))
               : "Не удалось загрузить новости"}
           </div>
         </div>

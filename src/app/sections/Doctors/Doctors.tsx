@@ -1,62 +1,19 @@
-"use client";
-import { useState, useEffect } from "react";
 import styles from "./style.module.scss";
-import Image from "next/image";
-import Link from "next/link";
 import { DoctorCard, Slider } from "@/app/components";
 
-const data = [
-  {
-    id: 1,
-    name: "Бурдуковская Наталья Викторовна",
-    image: "/images/doctors/image-1.webp",
-    label: "Стаж 25 лет",
-    description: "Главный врач, Врач функциональной диагностики, Врач-терапевт",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=166638&source=4",
-  },
-  {
-    id: 2,
-    name: "Савинов Аркадий Александрович",
-    image: "/images/doctors/image-2.webp",
-    label: "Стаж 14 лет",
-    description: "Врач-неврологт",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1351198&source=4",
-  },
-  {
-    id: 3,
-    name: "Сипрашвили Дарья Андреевна",
-    image: "/images/doctors/image-3.jpg",
-    label: "Стаж 3 года",
-    description: "Эндокринолог",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1095027&source=4",
-  },
-  {
-    id: 4,
-    name: "Бурдуковская Наталья Викторовна",
-    image: "/images/doctors/image-1.webp",
-    label: "Стаж 25 лет",
-    description: "Главный врач, Врач функциональной диагностики, Врач-терапевт",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=166638&source=4",
-  },
-  {
-    id: 5,
-    name: "Савинов Аркадий Александрович",
-    image: "/images/doctors/image-2.webp",
-    label: "Стаж 14 лет",
-    description: "Врач-неврологт",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1351198&source=4",
-  },
-  {
-    id: 6,
-    name: "Сипрашвили Дарья Андреевна",
-    image: "/images/doctors/image-3.jpg",
-    label: "Стаж 3 года",
-    description: "Эндокринолог",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1095027&source=4",
-  },
-];
+import fetchData from "@/app/utils/fetchData";
+import { notFound } from "next/navigation";
 
-export default function Doctors() {
+type PageResponse = {
+  data?: Array<Record<string, unknown>> | null;
+}
+
+export default async function Doctors() {
+  const domain = process.env.NEXT_PUBLIC_API_SERVER ?? "";
+  const page = await fetchData<PageResponse>(`/api/vrachis?populate=*`);
+
+  const data = page?.data;
+
   return (
     <section className={styles.doctors}>
       <div className="container">
@@ -73,7 +30,7 @@ export default function Doctors() {
             </p>
           </div>
 
-          <Slider data={data} Card={DoctorCard} slidesPerView={4} />
+          <Slider data={data} Card={DoctorCard} slidesPerView={4} loop={false} />
         </div>
       </div>
     </section>
