@@ -27,6 +27,8 @@ export default function Search() {
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
 
+  const domain = process.env.NEXT_PUBLIC_DOMAIN || "https://biosphera.ru";
+
   // Исправлено: типизация для setTimeout/clearTimeout
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -85,8 +87,8 @@ export default function Search() {
     debounceTimeout.current = setTimeout(async () => {
       try {
         // Тут можно добавить другие API источники, добавить в промис и объединить результаты
-        const newsUrl = `/api/novostis?filters[title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
-        const doctorsUrl = `/api/vrachis?filters[name][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
+        const newsUrl = `${domain}/api/novostis?filters[title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
+        const doctorsUrl = `${domain}/api/vrachis?filters[name][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
 
         const [newsResult, doctorsResult] = await Promise.all([
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -111,7 +113,7 @@ export default function Search() {
         clearTimeout(debounceTimeout.current);
       }
     };
-  }, [inputValue]);
+  }, [inputValue, domain]);
 
   return (
     <div className={styles.search_wrapper}>
@@ -129,7 +131,11 @@ export default function Search() {
               placeholder="Поиск"
             />
 
-            <button className={styles.delete} onClick={handleDelete}>
+            <button
+              className={styles.delete}
+              onClick={handleDelete}
+              type="button"
+            >
               <svg
                 width="16"
                 height="16"
@@ -137,6 +143,7 @@ export default function Search() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                <title>Удалить</title>
                 <path
                   d="M1.81282 0.0450334L15.955 14.1872L14.1872 15.9549L0.0450488 1.8128L1.81282 0.0450334Z"
                   fill="#6B6B6B"
@@ -166,9 +173,9 @@ export default function Search() {
                 inputValue.trim() !== "" && <li>Ничего не найдено</li>}
 
               {!loading &&
-                dataList.map((item, index) => {
+                dataList.map((item) => {
                   return (
-                    <li key={index} className={styles.item}>
+                    <li key={item.documentId} className={styles.item}>
                       {item.type === "news" && (
                         <Link
                           href={`/news/${item.documentId}`}
@@ -182,13 +189,13 @@ export default function Search() {
                       {item.type === "doctors" && (
                         <Link
                           href={`/doctors/${item?.slug}`}
-                          rel="noopener noreferrer">
+                          rel="noopener noreferrer"
+                        >
                           <span className={styles.item_title}>
                             {highlightText(item?.name ?? "", inputValue)}
                           </span>
                         </Link>
-                      )
-                      }
+                      )}
                     </li>
                   );
                 })}
@@ -196,6 +203,6 @@ export default function Search() {
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 }
