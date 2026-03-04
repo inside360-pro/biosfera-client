@@ -175,7 +175,7 @@ export default function Search() {
                           rel="noopener noreferrer"
                         >
                           <span className={styles.item_title}>
-                            {highlightText(item?.title, inputValue)}
+                            {highlightText(item?.title ?? "", inputValue)}
                           </span>
                         </Link>
                       )}
@@ -184,7 +184,7 @@ export default function Search() {
                           href={`/doctors/${item?.slug}`}
                           rel="noopener noreferrer">
                           <span className={styles.item_title}>
-                            {highlightText(item?.name, inputValue)}
+                            {highlightText(item?.name ?? "", inputValue)}
                           </span>
                         </Link>
                       )

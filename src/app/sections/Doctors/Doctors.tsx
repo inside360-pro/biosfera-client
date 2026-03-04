@@ -30,7 +30,7 @@ export default async function Doctors() {
             </p>
           </div>
 
-          <Slider data={data} Card={DoctorCard} slidesPerView={4} loop={false} />
+          <Slider data={data ?? []} Card={DoctorCard} slidesPerView={4} loop={false} />
         </div>
       </div>
     </section>

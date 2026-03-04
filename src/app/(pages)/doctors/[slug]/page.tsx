@@ -5,11 +5,28 @@ import Image from "next/image";
 import fetchData from "@/app/utils/fetchData";
 import { ContentRenderer } from "@/app/components";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
+import type { ContentItem } from "@/app/components/ContentRenderer/ContentRenderer";
 import styles from "./style.module.scss";
 
+type DoctorItem = {
+    main_photo?: { url?: string };
+    name?: string;
+    meta_title?: string;
+    description?: string;
+    title?: string;
+    specialization?: string;
+    experience?: string;
+    cost?: string;
+    medflex_link?: string;
+    education_link?: string;
+    accreditation_link?: string;
+    skills?: ContentItem[];
+    education?: ContentItem[];
+    accreditation?: ContentItem[];
+};
 
 type PageResponse = {
-    data?: Array<Record<string, unknown>> | null;
+    data?: DoctorItem[] | null;
 };
 
 
@@ -114,16 +131,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
                         <div className={styles.content}>
                             <div className={styles.content_item}>
                                 <h2 className={`${styles.title} text-gradient`}>Профессиональные навыки и знания</h2>
-                                <ContentRenderer content={data?.skills} />
+                                <ContentRenderer content={data?.skills ?? []} />
                             </div>
                             <div className={styles.content_item}>
                                 <h2 className={`${styles.title} text-gradient`}>Образование</h2>
-                                <ContentRenderer content={data?.education} />
+                                <ContentRenderer content={data?.education ?? []} />
                                 <a className={styles.button} href={data?.education_link} target="_blank">Посмотреть диплом</a>
                             </div>
                             <div className={styles.content_item}>
                                 <h2 className={`${styles.title} text-gradient`}>Аккредитации</h2>
-                                <ContentRenderer content={data?.accreditation} />
+                                <ContentRenderer content={data?.accreditation ?? []} />
                                 <a className={styles.button} href={data?.accreditation_link} target="_blank">Посмотреть аккредитации</a>
                             </div>
                         </div>

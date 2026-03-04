@@ -8,9 +8,14 @@ export const metadata = {
   description: "Врачи центра Биосфера ДВ",
 };
 
+type DoctorItem = {
+  documentId?: string;
+  [key: string]: unknown;
+};
+
 type PageResponse = {
-  data?: Array<Record<string, unknown>> | null;
-}
+  data?: DoctorItem[] | null;
+};
 
 const data = [
   {
@@ -67,8 +72,8 @@ export default async function DoctorsPage() {
       </p>
 
       <ul className={styles.list}>
-        {data && data.length > 0 && data.map((item) => (
-          <li key={item.documentId} className={styles.item1}>
+        {data && data.length > 0 && data.map((item, index) => (
+          <li key={item.documentId ?? index} className={styles.item1}>
             <DoctorCard data={item} />
           </li>
         ))}
