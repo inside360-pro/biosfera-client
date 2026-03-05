@@ -31,14 +31,14 @@
 .input {
     display: flex;
     width: 100%;
-    background-color: var(--white);
+    background: linear-gradient(90deg, #e6ecf3 0%, #fff 100%);
     padding: 15px 30px;
     color: var(--black);
+    border-radius: 100px;
 
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     font-size: 16px;
-    color: var(--black);
     border: none;
 
     @media (max-width: 560px) {
@@ -77,10 +77,12 @@
     left: 0;
     top: 64px;
     padding: 0 20px 20px 20px;
-    width: 100%;
+    width: 90%;
 
     max-height: 300px;
     overflow: auto;
+
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .image {
@@ -114,4 +116,15 @@
 
 .item_atr {
     padding-left: 10px;
+}
+
+.item_image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item_image_text {
+    margin-bottom: 10px;
+    font-weight: 700;
 }

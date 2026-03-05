@@ -192,7 +192,9 @@ export default function Header() {
           setPopupOpened={togglePopupState}
         />
 
-        <div ref={searchContainerRef}>{searchOpened && <Search />}</div>
+        <div ref={searchContainerRef}>
+          {searchOpened && <Search setSearchOpened={setSearchOpened} />}
+        </div>
       </div>
     </header>
   );

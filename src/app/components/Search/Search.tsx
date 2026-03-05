@@ -1,7 +1,15 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type KeyboardEvent,
+  type MouseEvent,
+} from "react";
 
 import fetchData from "../../utils/fetchData";
 
@@ -20,7 +28,15 @@ type ResponseItem = {
   // сюда дописывать другие поля из API
 };
 
-export default function Search() {
+type ApiListResponse<T> = {
+  data?: T[];
+};
+
+type SearchProps = {
+  setSearchOpened?: (value: boolean) => void;
+};
+
+export default function Search({ setSearchOpened }: SearchProps) {
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [dataList, setData] = useState<ResponseItem[]>([]);
@@ -32,26 +48,28 @@ export default function Search() {
   // Исправлено: типизация для setTimeout/clearTimeout
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDelete = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setInputValue("");
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const handleSearchSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSearchSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (inputValue.trim() === "") return;
     // Редирект
     router.push(`/search?query=${encodeURIComponent(inputValue.trim())}`);
+    setSearchOpened?.(false);
   };
 
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.which === 13) {
+  const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
       // Редирект
       router.push(`/search?query=${encodeURIComponent(inputValue.trim())}`);
+      setSearchOpened?.(false);
     }
   };
 
@@ -91,10 +109,8 @@ export default function Search() {
         const doctorsUrl = `${domain}/api/vrachis?filters[name][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
 
         const [newsResult, doctorsResult] = await Promise.all([
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          fetchData(newsUrl) as any,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          fetchData(doctorsUrl) as any,
+          fetchData<ApiListResponse<ResponseItem>>(newsUrl),
+          fetchData<ApiListResponse<ResponseItem>>(doctorsUrl),
         ]);
         const combinedData = [
           ...(newsResult?.data || []),
@@ -177,24 +193,49 @@ export default function Search() {
                   return (
                     <li key={item.documentId} className={styles.item}>
                       {item.type === "news" && (
-                        <Link
-                          href={`/news/${item.documentId}`}
-                          rel="noopener noreferrer"
-                        >
-                          <span className={styles.item_title}>
-                            {highlightText(item?.title ?? "", inputValue)}
-                          </span>
-                        </Link>
+                        <div className={styles.item_image_wrapper}>
+                          <p className={styles.item_image_text}>Новости</p>
+                          <div className={styles.item_image}>
+                            <Image
+                              src="/icons/search-icon.svg"
+                              alt="search-icon"
+                              width={22}
+                              height={22}
+                            />
+                            <Link
+                              href={`/news/${item.documentId}`}
+                              rel="noopener noreferrer"
+                              onClick={() => setSearchOpened?.(false)}
+                            >
+                              <span className={styles.item_title}>
+                                {highlightText(item?.title ?? "", inputValue)}
+                              </span>
+                            </Link>
+                          </div>
+                        </div>
                       )}
                       {item.type === "doctors" && (
-                        <Link
-                          href={`/doctors/${item?.slug}`}
-                          rel="noopener noreferrer"
-                        >
-                          <span className={styles.item_title}>
-                            {highlightText(item?.name ?? "", inputValue)}
-                          </span>
-                        </Link>
+                        <div className={styles.item_image_wrapper}>
+                          <p className={styles.item_image_text}>Врачи</p>
+                          <div className={styles.item_image}>
+                            <Image
+                              src="/icons/search-icon.svg"
+                              alt="search-icon"
+                              width={22}
+                              height={22}
+                            />
+
+                            <Link
+                              href={`/doctors/${item?.slug}`}
+                              rel="noopener noreferrer"
+                              onClick={() => setSearchOpened?.(false)}
+                            >
+                              <span className={styles.item_title}>
+                                {highlightText(item?.name ?? "", inputValue)}
+                              </span>
+                            </Link>
+                          </div>
+                        </div>
                       )}
                     </li>
                   );
