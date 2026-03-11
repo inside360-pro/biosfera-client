@@ -12,6 +12,18 @@ const menuLinks = [
       { title: "Неврология", url: "/services/nevrologiya" },
       { title: "Эндокринология", url: "/services/endokrinologiya" },
       { title: "Диагностика", url: "/services/diagnostika" },
+      {
+        title: "Функциональная диагностика",
+        url: "/services/therapy/funkcionalnaya-diagnostika",
+      },
+      {
+        title: "Лабораторная диагностика",
+        url: "/services/therapy/laboratornaya-diagnostika",
+      },
+      {
+        title: "Телемедицина",
+        url: "/services/therapy/telemedicina",
+      },
     ],
   },
   { title: "Цены", url: "/price" },
