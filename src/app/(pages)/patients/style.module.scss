@@ -219,3 +219,9 @@
 .control_item_description {
     @include adaptiv-value("font-size", 16, 14);
 }
+
+.mob_link {
+    display: block;
+    margin-top: 20px;
+    text-decoration: underline;
+}

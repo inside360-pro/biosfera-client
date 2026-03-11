@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ReviewsPopup, StarRating } from "@/app/components";
+import { ReviewsPopup, StarRating, LoadingText } from "@/app/components";
 import fetchData from "@/app/utils/fetchData";
 import styles from "./style.module.scss";
 import formatDate from "@/app/utils/formatDate";
@@ -62,7 +62,7 @@ export default function ContentPage() {
           ;
 
         const newReviews: ReviewsResponse = await fetchData(url);
-        setReviews(prev => [...prev, ...newReviews.data]);
+        setReviews(prev => (page === 1 ? newReviews.data : [...prev, ...newReviews.data]));
         setHasMore(page < newReviews.meta.pagination.pageCount);
         setIsLoading(false);
 
@@ -88,8 +88,10 @@ export default function ContentPage() {
           <p className={styles.text}>Мы ценим доверие наших пациентов и внимательно относимся к каждому отзыву. Обратная связь помогает нам становиться лучше и поддерживать высокий уровень медицинской помощи и сервиса.</p>
 
 
+          {isLoading && reviews.length === 0 && (
+            <LoadingText className={styles.text} />
+          )}
           <ul className={styles.reviews_list}>
-
             {reviews && reviews.length > 0 && reviews.map((item, index) => (
               <li className={styles.reviews_item} key={`${item?.name}-${index ?? 0}`}>
                 <Image

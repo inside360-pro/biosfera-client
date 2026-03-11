@@ -55,7 +55,7 @@ const items: MenuItem[] = [
     scrollToId: "section",
   },
   {
-    label: "Отзывы",
+    label: "Мобильное приложение (МедТочка)",
     href: "/patients/otzyvy",
     scrollToId: "section",
   },

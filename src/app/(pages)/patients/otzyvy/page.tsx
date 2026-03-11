@@ -48,7 +48,12 @@ export default async function Patients() {
       <div className={styles.page_wrapper}>
         <SideBarMenu />
         <div className={styles.content} id="section">
-          <ReviewsForm />
+          {/* <ReviewsForm /> */}
+
+          <h1>Личный кабинет пациента</h1>
+          <p>с защищённой электронной медкартой, которую легко показать любому врачу</p>
+
+          <a className={styles.mob_link} target="_blank" href="https://medtochka.ru/">Скачать мобильное приложение <span className="text-gradient">МедТочка</span></a>
         </div>
       </div>
     </main>

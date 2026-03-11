@@ -16,8 +16,9 @@ export default async function Patients() {
         <SideBarMenu />
         <div className={styles.content} id="section">
           <h1 className={styles.content__title}>Подписание договора онлайн</h1>
+          <p>В данный момент услуга не активна</p>
 
-          <DogovorForm />
+          {/* <DogovorForm /> */}
         </div>
       </div>
     </main>

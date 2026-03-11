@@ -25,3 +25,4 @@ export { default as SideBarMenu } from "./SideBarMenu/SideBarMenu";
 export { default as DogovorForm } from "./DogovorForm/DogovorForm";
 export { default as ReviewsForm } from "./ReviewsForm/ReviewsForm";
 export { default as StarRating } from "./StarRating/StarRating";
+export { default as LoadingText } from "./LoadingText/LoadingText";

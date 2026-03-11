@@ -32,6 +32,9 @@ export default function ContentPage({ data }: { data: any }) {
   const recomendations = data?.data?.[0]?.section;
   const how = data?.data?.[0]?.how;
 
+  console.log(data);
+
+
   return (
     <>
       <h1 className="visually-hidden">{hero?.hero_title}</h1>
@@ -134,15 +137,17 @@ export default function ContentPage({ data }: { data: any }) {
             </div>
 
             <div className={styles.recomendations__image}>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_API_SERVER}${recomendations?.image?.url}`}
-                alt={data?.data?.[0]?.recomendations_image?.alt ?? "alt text"}
-                width={704}
-                height={608}
-                className="dsv-image"
-                placeholder="blur"
-                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MiIgaGVpZ2h0PSIxMTg5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNjY2MiIC8+PC9zdmc+"
-              />
+              {recomendations?.image?.url && (
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_SERVER}${recomendations.image.url}`}
+                  alt={data?.data?.[0]?.recomendations_image?.alt ?? "alt text"}
+                  width={704}
+                  height={608}
+                  className="dsv-image"
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MiIgaGVpZ2h0PSIxMTg5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNjY2MiIC8+PC9zdmc+"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -154,8 +159,9 @@ export default function ContentPage({ data }: { data: any }) {
             <h2 className={styles.secton_title} dangerouslySetInnerHTML={{ __html: how?.title ?? "" }}></h2>
             <div className={styles.how_content__wrapper}>
               <div className={styles.recomendations__image}>
+                {how?.image?.url && (
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_API_SERVER}${how?.image?.url}`}
+                    src={`${process.env.NEXT_PUBLIC_API_SERVER}${how.image.url}`}
                     alt={data?.data?.[0]?.how?.alt ?? "alt text"}
                     width={528}
                     height={375}
@@ -163,6 +169,7 @@ export default function ContentPage({ data }: { data: any }) {
                     placeholder="blur"
                     blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MiIgaGVpZ2h0PSIxMTg5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNjY2MiIC8+PC9zdmc+"
                   />
+                )}
               </div>
               <div className={styles.how_content__text}>
                 <ContentRenderer content={how?.content ?? []} />

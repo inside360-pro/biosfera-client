@@ -60,7 +60,7 @@
 
 .hero_title {
     position: relative;
-    z-index: 2;
+    z-index: 0;
     color: var(--white);
     @include adaptiv-value("font-size", 50, 26);
     margin-bottom: 30px;
