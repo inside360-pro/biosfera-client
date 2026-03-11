@@ -40,6 +40,8 @@ export default function ContentPage() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState<boolean>(false);
 
+  const domain = process.env.NEXT_PUBLIC_DOMAIN ?? "";
+
   // для пагинации
   const PAGE_SIZE: number = 2; // количество отзывов на странице
   const [page, setPage] = useState<number>(1);
@@ -52,7 +54,7 @@ export default function ContentPage() {
       setIsLoading(true);
       try {
         const url =
-          `/api/otzyvies` +
+          `${domain}api/otzyvies` +
           `?populate=*` +
           `&filters[active][$eq]=true` +
           `&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +

@@ -17,8 +17,8 @@ interface FormData {
   review_text?: string;
 }
 
-const domain = process.env.NEXT_PUBLIC_API_SERVER;
-const url = `${domain}/api/otzyvies`;
+const domain = process.env.NEXT_PUBLIC_DOMAIN;
+const url = `${domain}api/otzyvies`;
 
 export async function sendReviewsService(reviewsData: FormData) {
   try {
