@@ -3,6 +3,7 @@ import styles from "../style.module.scss";
 import fetchData from "@/app/utils/fetchData";
 import { notFound } from "next/navigation";
 import { SideBarMenu } from "@/app/components";
+import { ReviewsForm } from "@/app/components";
 
 type PageResponse = {
   data: {
@@ -47,8 +48,7 @@ export default async function Patients() {
       <div className={styles.page_wrapper}>
         <SideBarMenu />
         <div className={styles.content} id="section">
-          <h1>Отзывы</h1>
-          <p>Здесь пока ничего нет, но скоро будет.</p>
+          <ReviewsForm />
         </div>
       </div>
     </main>
