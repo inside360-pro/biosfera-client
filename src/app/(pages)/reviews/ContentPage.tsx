@@ -54,7 +54,7 @@ export default function ContentPage() {
       setIsLoading(true);
       try {
         const url =
-          `${domain}api/otzyvies` +
+          `${domain}/api/otzyvies` +
           `?populate=*` +
           `&filters[active][$eq]=true` +
           `&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +

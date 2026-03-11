@@ -18,7 +18,7 @@ interface FormData {
 }
 
 const domain = process.env.NEXT_PUBLIC_DOMAIN;
-const url = `${domain}api/otzyvies`;
+const url = `${domain}/api/otzyvies`;
 
 export async function sendReviewsService(reviewsData: FormData) {
   try {
