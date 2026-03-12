@@ -23,8 +23,18 @@ const servicesList = [
   },
   {
     image: "/images/services-4.webp",
-    title: "Диагностика",
-    link: "/services/diagnostika",
+    title: "Функциональная диагностика",
+    link: "/services/therapy/funkcionalnaya-diagnostika",
+  },
+  {
+    image: "/images/services-4.webp",
+    title: "Лабораторная диагностика",
+    link: "/services/therapy/laboratornaya-diagnostika",
+  },
+  {
+    image: "/images/services-4.webp",
+    title: "Телемедицина",
+    link: "/services/therapy/telemedicina",
   },
 ];
 

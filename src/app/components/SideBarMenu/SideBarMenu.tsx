@@ -30,6 +30,16 @@ const items: MenuItem[] = [
     scrollToId: "section",
   },
   {
+    label: "Программа лояльности",
+    href: "/patients/programma-loyalnosti",
+    scrollToId: "section",
+  },
+  {
+    label: "Полезные материалы",
+    href: "/patients/poleznye-materialy",
+    scrollToId: "section",
+  },
+  {
     label: "Контролирующие органы",
     href: "/patients/kontroliruyushchie-organi",
     scrollToId: "section",

@@ -17,36 +17,8 @@ type PageResponse = {
   data?: DoctorItem[] | null;
 };
 
-const data = [
-  {
-    id: 1,
-    name: "Бурдуковская Наталья Викторовна",
-    image: "/images/doctors/image-1.webp",
-    label: "Стаж 25 лет",
-    description: "Главный врач, Врач функциональной диагностики, Врач-терапевт",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=166638&source=4",
-  },
-  {
-    id: 2,
-    name: "Савинов Аркадий Александрович",
-    image: "/images/doctors/image-2.webp",
-    label: "Стаж 14 лет",
-    description: "Врач-неврологт",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1351198&source=4",
-  },
-  {
-    id: 3,
-    name: "Сипрашвили Дарья Андреевна",
-    image: "/images/doctors/image-3.jpg",
-    label: "Стаж 3 года",
-    description: "Эндокринолог",
-    link: "https://booking.medflex.ru?user=be54557cf76e37ed7e2b8308eecb3e44&employeeId=1095027&source=4",
-  },
-];
-
 export default async function DoctorsPage() {
   let page: PageResponse | null = null;
-  const domain = process.env.NEXT_PUBLIC_API_SERVER ?? "";
 
   try {
     page = await fetchData<PageResponse>(`/api/vrachis?populate=*`);
@@ -72,11 +44,13 @@ export default async function DoctorsPage() {
       </p>
 
       <ul className={styles.list}>
-        {data && data.length > 0 && data.map((item, index) => (
-          <li key={item.documentId ?? index} className={styles.item1}>
-            <DoctorCard data={item} />
-          </li>
-        ))}
+        {data &&
+          data.length > 0 &&
+          data.map((item, index) => (
+            <li key={item.documentId ?? index} className={styles.item1}>
+              <DoctorCard data={item} />
+            </li>
+          ))}
       </ul>
     </div>
   );

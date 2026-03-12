@@ -44,6 +44,8 @@ export default function Search({ setSearchOpened }: SearchProps) {
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
 
+  console.log("dataList", dataList);
+
   const domain = process.env.NEXT_PUBLIC_DOMAIN || "https://biosphera.ru";
 
   // Исправлено: типизация для setTimeout/clearTimeout
@@ -112,7 +114,13 @@ export default function Search({ setSearchOpened }: SearchProps) {
         const podUslugaUrl = `${domain}/api/shablon-pod-uslugas?filters[hero_title][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
         const specializationUrl = `${domain}/api/vrachis?filters[specialization][$containsi]=${encodeURIComponent(inputValue)}&populate=*`;
 
-        const [newsResult, doctorsResult, uslugaResult, podUslugaResult, specializationResult] = await Promise.all([
+        const [
+          newsResult,
+          doctorsResult,
+          uslugaResult,
+          podUslugaResult,
+          specializationResult,
+        ] = await Promise.all([
           fetchData<ApiListResponse<ResponseItem>>(newsUrl),
           fetchData<ApiListResponse<ResponseItem>>(doctorsUrl),
           fetchData<ApiListResponse<ResponseItem>>(uslugaUrl),
@@ -123,7 +131,6 @@ export default function Search({ setSearchOpened }: SearchProps) {
           ...(newsResult?.data || []),
           ...(doctorsResult?.data || []),
           ...(uslugaResult?.data || []),
-          ...(podUslugaResult?.data || []),
           ...(podUslugaResult?.data || []),
           ...(specializationResult?.data || []),
         ];
@@ -202,7 +209,10 @@ export default function Search({ setSearchOpened }: SearchProps) {
               {!loading &&
                 dataList.map((item, index) => {
                   return (
-                    <li key={`${item.documentId}-${index}`} className={styles.item}>
+                    <li
+                      key={`${item.documentId}-${index}`}
+                      className={styles.item}
+                    >
                       {item.type === "news" && (
                         <div className={styles.item_image_wrapper}>
                           <p className={styles.item_image_text}>Новости</p>
@@ -267,7 +277,10 @@ export default function Search({ setSearchOpened }: SearchProps) {
                               onClick={() => setSearchOpened?.(false)}
                             >
                               <span className={styles.item_title}>
-                                {highlightText(item?.hero_title ?? "", inputValue)}
+                                {highlightText(
+                                  item?.hero_title ?? "",
+                                  inputValue,
+                                )}
                               </span>
                             </Link>
                           </div>
@@ -291,7 +304,10 @@ export default function Search({ setSearchOpened }: SearchProps) {
                               onClick={() => setSearchOpened?.(false)}
                             >
                               <span className={styles.item_title}>
-                                {highlightText(item?.hero_title ?? "", inputValue)}
+                                {highlightText(
+                                  item?.hero_title ?? "",
+                                  inputValue,
+                                )}
                               </span>
                             </Link>
                           </div>

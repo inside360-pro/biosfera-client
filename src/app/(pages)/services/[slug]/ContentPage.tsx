@@ -3,18 +3,19 @@ import Image from "next/image";
 import {
   AnimateElement,
   ContentRenderer,
-  CostItem,
+  // CostItem,
   SliderServices,
 } from "@/app/components";
 import { usePopupStore } from "@/app/store/popupStore";
 import styles from "./style.module.scss";
 import type {
-  CostItemType,
+  // CostItemType,
   SliderItemType,
   IncludesItemType,
 } from "@/app/types";
 import Accordion from "@/app/components/Accordion/Accordion";
 import Gallery from "@/app/sections/Gallery/Gallery";
+import { useCallback } from "react";
 
 export interface SliderProps {
   items: SliderItemType[];
@@ -27,7 +28,7 @@ export interface RecomendationsItemType {
 export default function ContentPage({ data }: { data: any }) {
   const { togglePopupState } = usePopupStore();
   const hero = data?.data?.[0];
-  const prices = data?.data?.[0]?.prices?.[0]?.item;
+  // const prices = data?.data?.[0]?.prices?.[0]?.item;
   const slider_items = data?.data?.[0]?.services_slider;
   const includes_list = data?.data?.[0]?.items;
   const recomendations = data?.data?.[0]?.section;
@@ -36,6 +37,49 @@ export default function ContentPage({ data }: { data: any }) {
   const gallery = data?.data?.[0]?.gallery;
 
   const showGallery = data?.data?.[0]?.show_gallery;
+
+  const openMedflexRoundWidget = useCallback(() => {
+    const clickWidgetButton = () => {
+      const button = document.querySelector(
+        ".medflex-round-widget__button",
+      ) as HTMLElement | null;
+      if (!button) return false;
+      button.click();
+      return true;
+    };
+
+    if (clickWidgetButton()) return;
+
+    let tries = 0;
+    const maxTries = 20;
+    const intervalMs = 100;
+
+    const timerId = window.setInterval(() => {
+      tries += 1;
+
+      if (clickWidgetButton()) {
+        window.clearInterval(timerId);
+        return;
+      }
+
+      if (tries >= maxTries) {
+        window.clearInterval(timerId);
+
+        const dataEl = document.getElementById("medflexRoundWidgetData");
+        const src = dataEl?.dataset?.src;
+        if (!src) return;
+
+        try {
+          const url = new URL(src);
+          url.searchParams.delete("isRoundWidget");
+          url.searchParams.set("source", "3");
+          window.open(url.toString(), "_blank", "noopener,noreferrer");
+        } catch {
+          window.open(src, "_blank", "noopener,noreferrer");
+        }
+      }
+    }, intervalMs);
+  }, []);
 
   return (
     <>
@@ -78,7 +122,8 @@ export default function ContentPage({ data }: { data: any }) {
             <AnimateElement animationDelay={100}>
               <button
                 className={styles.hero_button}
-                onClick={togglePopupState}
+                // onClick={togglePopupState}
+                onClick={openMedflexRoundWidget}
                 type="button"
               >
                 Записаться на прием
@@ -88,7 +133,7 @@ export default function ContentPage({ data }: { data: any }) {
         </div>
       </section>
 
-      <section className={`${styles.costs} ${styles.section}`}>
+      {/* <section className={`${styles.costs} ${styles.section}`}>
         <div className="container">
           <header className={styles.costs__header}>
             <h2 className={styles.costs__title}>
@@ -107,7 +152,7 @@ export default function ContentPage({ data }: { data: any }) {
             ))}
           </ul>
         </div>
-      </section>
+      </section> */}
 
       <section className={`${styles.slider_services} ${styles.section}`}>
         <SliderServices items={(slider_items ?? []) as SliderItemType[]} />
@@ -116,7 +161,12 @@ export default function ContentPage({ data }: { data: any }) {
       <section className={`${styles.includes} ${styles.section}`}>
         <div className="container">
           <header className={styles.includes__header}>
-              <h2 className={styles.includes__title} dangerouslySetInnerHTML={{ __html: data?.data?.[0]?.includes_title ?? "" }}></h2>
+            <h2
+              className={styles.includes__title}
+              dangerouslySetInnerHTML={{
+                __html: data?.data?.[0]?.includes_title ?? "",
+              }}
+            ></h2>
             <p>{data?.data?.[0]?.includes_description ?? ""}</p>
           </header>
 
@@ -140,7 +190,10 @@ export default function ContentPage({ data }: { data: any }) {
 
       <section className={`${styles.recomendations} ${styles.section}`}>
         <div className="container">
-          <h2 className={styles.secton_title} dangerouslySetInnerHTML={{ __html: recomendations?.title ?? "" }}></h2>
+          <h2
+            className={styles.secton_title}
+            dangerouslySetInnerHTML={{ __html: recomendations?.title ?? "" }}
+          ></h2>
 
           <div className={styles.recomendations__wrapper}>
             <div className={styles.recomendations__block}>

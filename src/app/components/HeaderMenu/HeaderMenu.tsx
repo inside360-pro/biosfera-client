@@ -11,7 +11,6 @@ const menuLinks = [
       { title: "Терапия", url: "/services/therapy" },
       { title: "Неврология", url: "/services/nevrologiya" },
       { title: "Эндокринология", url: "/services/endokrinologiya" },
-      { title: "Диагностика", url: "/services/diagnostika" },
       {
         title: "Функциональная диагностика",
         url: "/services/therapy/funkcionalnaya-diagnostika",
