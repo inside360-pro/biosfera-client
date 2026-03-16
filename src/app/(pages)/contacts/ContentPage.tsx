@@ -61,99 +61,115 @@ export default function ContentPage(props: ContactsContentProps) {
   const emailHref = email ? `mailto:${email}` : "";
 
   return (
-    <section className={styles.map}>
-      <div className={styles.map__outer_wrapper}>
-        <div className={styles.map__wrapper}>
-          <div className={styles.map__header}>
-            <h2 className={styles.map__title}>Как проехать</h2>
-            <p className={styles.map__subtitle}>
-              Мы находимся в удобном месте, куда вы можете приехать на
-              общественном транспорте
-            </p>
-          </div>
+    <>
+      <section className={styles.map}>
+        <div className={styles.map__outer_wrapper}>
+          <div className={styles.map__wrapper}>
+            <div className={styles.map__header}>
+              <h2 className={styles.map__title}>Как проехать</h2>
+              <p className={styles.map__subtitle}>
+                Мы находимся в удобном месте, куда вы можете приехать на
+                общественном транспорте
+              </p>
+            </div>
 
-          <div className={styles.map__content}>
-            <div className={styles.map__main}>
-              <ul className={styles.map__contacts}>
-                <li className={styles.map__contact}>
-                  <Image
-                    src="/icons/geo_b.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                    className={styles.map__contact_icon}
-                  />
-                  <span>{address}</span>
-                </li>
-                <li className={styles.map__contact}>
-                  <Image
-                    src="/icons/phone.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                    className={styles.map__contact_icon}
-                  />
-                  <div>
-                    {phone ? <a href={phoneHref}>{phoneText}</a> : <span />}
-                    <button
-                      type="button"
-                      className={`${styles.map__contact_link} text-gradient`}
-                      onClick={() => togglePopupState()}
-                    >
-                      Заказать звонок
-                    </button>
-                  </div>
-                </li>
-                <li className={styles.map__contact}>
-                  <Image
-                    src="/icons/envelope.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                    className={styles.map__contact_icon}
-                  />
-                  <div>
-                    {email ? <a href={emailHref}>{email}</a> : <span />}
-                    {email ? (
-                      <a
-                        href={emailHref}
+            <div className={styles.map__content}>
+              <div className={styles.map__main}>
+                <ul className={styles.map__contacts}>
+                  <li className={styles.map__contact}>
+                    <Image
+                      src="/icons/geo_b.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                      className={styles.map__contact_icon}
+                    />
+                    <span>{address}</span>
+                  </li>
+                  <li className={styles.map__contact}>
+                    <Image
+                      src="/icons/phone.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                      className={styles.map__contact_icon}
+                    />
+                    <div>
+                      {phone ? <a href={phoneHref}>{phoneText}</a> : <span />}
+                      <button
+                        type="button"
                         className={`${styles.map__contact_link} text-gradient`}
+                        onClick={() => togglePopupState()}
                       >
-                        Написать
-                      </a>
-                    ) : null}
-                  </div>
-                </li>
-                <li className={styles.map__contact}>
-                  <Image
-                    src="/icons/clock.svg"
-                    alt=""
-                    width={24}
-                    height={24}
-                    className={styles.map__contact_icon}
-                  />
-                  <div>
-                    {scheduleLines.map((line, idx) => (
-                      <span key={`${idx}-${line}`}>{line}</span>
-                    ))}
-                  </div>
-                </li>
-              </ul>
+                        Заказать звонок
+                      </button>
+                    </div>
+                  </li>
+                  <li className={styles.map__contact}>
+                    <Image
+                      src="/icons/envelope.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                      className={styles.map__contact_icon}
+                    />
+                    <div>
+                      {email ? <a href={emailHref}>{email}</a> : <span />}
+                      {email ? (
+                        <a
+                          href={emailHref}
+                          className={`${styles.map__contact_link} text-gradient`}
+                        >
+                          Написать
+                        </a>
+                      ) : null}
+                    </div>
+                  </li>
+                  <li className={styles.map__contact}>
+                    <Image
+                      src="/icons/clock.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                      className={styles.map__contact_icon}
+                    />
+                    <div>
+                      {scheduleLines.map((line, idx) => (
+                        <span key={`${idx}-${line}`}>{line}</span>
+                      ))}
+                    </div>
+                  </li>
+                </ul>
 
-              <div className={styles.map__iframe_wrapper}>
-                <iframe
-                  src={MAP_IFRAME_SRC}
-                  title="Карта Биосфера ДВ"
-                  className={styles.map__iframe}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+                <div className={styles.map__iframe_wrapper}>
+                  <iframe
+                    src={MAP_IFRAME_SRC}
+                    title="Карта Биосфера ДВ"
+                    className={styles.map__iframe}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
+
+      <div className="widget-container">
+        <a
+          href="https://prodoctorov.ru/vladivostok/lpu/112840-medicinskiy-centr-biosfera-dv/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://prodoctorov.ru/rating/widget/recommend/112840/240.png"
+            title="ПроДокторов - Медицинский центр «Биосфера ДВ», Владивосток"
+            alt="ПроДокторов - Медицинский центр «Биосфера ДВ», Владивосток"
+          />
+        </a>
       </div>
-    </section>
+    </>
   );
 }

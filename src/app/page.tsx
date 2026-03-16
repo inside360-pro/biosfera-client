@@ -12,6 +12,7 @@ import {
 import styles from "./page.module.css";
 import fetchData from "./utils/fetchData";
 import type { NewsItemType } from "./types";
+import Script from "next/script";
 
 type GalleryImage = {
   id: number;
@@ -85,7 +86,57 @@ export default async function Home() {
       <Doctors />
       <News data={news} />
       <MapSection />
-
+      <div className="container widget-container">
+        <a
+          href="https://napopravku.ru/vladivostok/clinics/biosfera-dv-medicinskiy-centr/#otziv"
+          style={{
+            display: "inline-block",
+            height: "min-content",
+            width: "min-content",
+          }}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <object
+            style={{ pointerEvents: "none" }}
+            data="https://widgets.napopravku.ru/widget/reviews?id=2970035&type=clinic&size=horizontal"
+            type="image/svg+xml"
+            width="316"
+            height="111"
+            title="Отзывы на Napopravku"
+          />
+        </a>
+        <div id="pd_widget_mini" className="pd_widget_mini " data-lpu="112840">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pd_lpu_name"
+            href="https://prodoctorov.ru/vladivostok/lpu/112840-medicinskiy-centr-biosfera-dv/"
+          >
+            Медицинский центр «Биосфера ДВ»
+          </a>
+          <div
+            className="pd_widget_mini_content"
+            id="pd_widget_mini_content_112840"
+          ></div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://prodoctorov.ru/"
+          >
+            <img
+              className="pd_logo"
+              width="96"
+              src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png"
+              alt="ProDoctor"
+            />
+          </a>
+        </div>
+        <Script
+          defer
+          src="https://prodoctorov.ru/static/js/widget_mini.js?v06"
+        ></Script>
+      </div>
       {/* <Image
         src="/Item.png"
         alt="VDS"
@@ -94,7 +145,6 @@ export default async function Home() {
         className="dsv-image"
         priority
       /> */}
-
       {/* <p className="text">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id adipisci,
         temporibus nesciunt cumque deleniti, quas eligendi est esse,

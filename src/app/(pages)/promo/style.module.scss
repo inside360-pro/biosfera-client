@@ -86,3 +86,13 @@
         font-size: 0.875rem
     }
 }
+
+.promo_item_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 20px;
+}
+
+.promo_slider {}
