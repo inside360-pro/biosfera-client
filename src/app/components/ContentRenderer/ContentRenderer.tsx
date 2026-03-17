@@ -11,6 +11,7 @@ export type ContentItem = {
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
+  strikethrough?: boolean;
   text?: string;
   image?: {
     url: string;
@@ -35,15 +36,15 @@ const getKeyBase = (item: ContentItem, depth = 0): string => {
     case "text":
       return `text:${safeText}:${item.bold ? "b" : ""}${item.italic ? "i" : ""}${
         item.underline ? "u" : ""
-      }`;
+      }${item.strikethrough ? "s" : ""}`;
+    case "paragraph":
+      return `paragraph:${item.strikethrough ? "s" : ""}`;
     case "image":
       return `image:${item.image?.url ?? ""}`;
     case "heading":
       return `heading:${item.level ?? ""}`;
     case "list":
       return `list:${item.format ?? ""}`;
-    case "paragraph":
-      return "paragraph";
     case "list-item":
       return "list-item";
     default:
@@ -76,11 +77,14 @@ export const renderContent = (content: ContentItem[]): React.ReactNode => {
       }
 
       case "paragraph":
-        return (
-          <p className={styles.p} key={key}>
-            {renderContent(item.children)}
-          </p>
-        );
+        {
+          const body = renderContent(item.children);
+          return (
+            <p className={styles.p} key={key}>
+              {item.strikethrough ? <del>{body}</del> : body}
+            </p>
+          );
+        }
 
       case "list": {
         const ListTag: ListTagType = item.format === "unordered" ? "ul" : "ol";
@@ -103,6 +107,7 @@ export const renderContent = (content: ContentItem[]): React.ReactNode => {
           const text = item.text ?? "";
           let node: React.ReactNode = text;
 
+          if (item.strikethrough) node = <del>{node}</del>;
           if (item.underline) node = <u>{node}</u>;
           if (item.italic) node = <em>{node}</em>;
           if (item.bold) node = <strong>{node}</strong>;

@@ -31,7 +31,7 @@ const apiUrl = "/api/akcziis?populate=*";
 
 export default async function Promo() {
   let page: PromoPageResponse | null = null;
-  const domain = process.env.NEXT_PUBLIC_API_SERVER ?? "";
+
   try {
     page = await fetchData<PromoPageResponse>(apiUrl);
   } catch (error) {
@@ -41,6 +41,8 @@ export default async function Promo() {
   if (!page?.data) {
     return notFound();
   }
+
+  console.log(page.data);
 
   return (
     <div className="container">

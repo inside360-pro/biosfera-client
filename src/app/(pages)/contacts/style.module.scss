@@ -27,9 +27,11 @@ $bp-tiny: 400px;
 
 .map__header {
     display: grid;
-    grid-template-columns: 1fr 320px;
+    grid-template-columns: 1fr 2fr 320px;
     gap: 24px;
-    align-items: start;
+    align-items: center;
+    justify-content: space-between;
+
     padding-top: 20px;
 
     @media (max-width: $bp-tablet) {
@@ -39,6 +41,16 @@ $bp-tiny: 400px;
 
     @media (max-width: $bp-mobile) {
         gap: 16px;
+    }
+}
+
+.map__widget_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $bp-tablet) {
+        justify-content: flex-start;
     }
 }
 
