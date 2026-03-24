@@ -21,6 +21,8 @@ const menuLinks = [
         url: "/services/therapy/laboratornaya-diagnostika",
       },
       { title: "Телемедицина", url: "/services/therapy/telemedicina" },
+      { title: "Ультразвуковая диагностика", url: "/services/therapy/ultrazvukovaya-diagnostika" },
+      { title: "Блокады", url: "/services/therapy/blokady" },
     ],
   },
   { title: "Цены", url: "/price" },

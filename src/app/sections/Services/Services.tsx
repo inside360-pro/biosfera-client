@@ -36,6 +36,16 @@ const servicesList = [
     title: "Телемедицина",
     link: "/services/therapy/telemedicina",
   },
+  {
+    image: "/images/services-4.webp",
+    title: "Ультразвуковая диагностика",
+    link: "/services/therapy/ultrazvukovaya-diagnostika",
+  },
+  {
+    image: "/images/services-4.webp",
+    title: "Блокады",
+    link: "/services/therapy/blokady",
+  },
 ];
 
 export default function Services({ className }: { className?: string }) {

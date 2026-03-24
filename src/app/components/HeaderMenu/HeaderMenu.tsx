@@ -23,6 +23,14 @@ const menuLinks = [
         title: "Телемедицина",
         url: "/services/therapy/telemedicina",
       },
+      {
+        title: "Ультразвуковая диагностика",
+        url: "/services/therapy/ultrazvukovaya-diagnostika",
+      },
+      {
+        title: "Блокады",
+        url: "/services/therapy/blokady",
+      },
     ],
   },
   { title: "Цены", url: "/price" },
