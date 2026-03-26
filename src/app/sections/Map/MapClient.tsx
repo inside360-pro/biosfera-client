@@ -10,7 +10,7 @@ import {
 } from "@/app/utils/normalizePhoneForTel";
 
 const MAP_TABS = [
-  { id: "scheme", label: "Схема города" },
+  { id: "scheme", label: "Схема проезда" },
   { id: "map", label: "Карта" },
 ] as const;
 
@@ -43,7 +43,10 @@ function formatPhoneForDisplay(phone: string): string {
     return `+7 (${match[1]}) ${match[2]}-${match[3]}-${match[4]}`;
   }
 
-  return phone.replace(/\u00A0/g, " ").replace(/\s+/g, " ").trim();
+  return phone
+    .replace(/\u00A0/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function scheduleToLines(value?: string): string[] {
@@ -96,6 +99,7 @@ export default function MapClient(props: MapClientProps) {
                   </button>
                 ))}
               </div>
+
               <div className={styles.map__stops_row}>
                 {TRANSPORT_STOPS.map((stop) => (
                   <div key={stop.name} className={styles.map__stop}>
@@ -131,7 +135,13 @@ export default function MapClient(props: MapClientProps) {
                     />
                   ) : (
                     <div className={styles.map__placeholder}>
-                      <p>Схема города — загрузите iframe или изображение</p>
+                      <Image
+                        src="/proezd.webp"
+                        alt="Схема проезда"
+                        width={1358}
+                        height={567}
+                        className={styles.map__placeholder_image}
+                      />
                     </div>
                   )}
                 </div>
@@ -177,7 +187,10 @@ export default function MapClient(props: MapClientProps) {
                     <div>
                       {email ? <a href={emailHref}>{email}</a> : <span />}
                       {email ? (
-                        <a href={emailHref} className={styles.map__contact_link}>
+                        <a
+                          href={emailHref}
+                          className={styles.map__contact_link}
+                        >
                           Написать
                         </a>
                       ) : null}
@@ -208,4 +221,3 @@ export default function MapClient(props: MapClientProps) {
     </section>
   );
 }
-
