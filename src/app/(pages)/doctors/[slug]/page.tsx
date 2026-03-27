@@ -6,7 +6,7 @@ import { ContentRenderer } from "@/app/components";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import type { ContentItem } from "@/app/components/ContentRenderer/ContentRenderer";
 import styles from "./style.module.scss";
-import ProdoctorovFooterWidget from "@/app/components/ProdoctorovFooterWidget/ProdoctorovFooterWidget";
+// import ProdoctorovFooterWidget from "@/app/components/ProdoctorovFooterWidget/ProdoctorovFooterWidget";
 
 type DoctorItem = {
   main_photo?: { url?: string };
@@ -158,7 +158,7 @@ export default async function Page({
                 <ContentRenderer content={data?.skills ?? []} />
               </div>
 
-              <ProdoctorovFooterWidget />
+              {/* <ProdoctorovFooterWidget /> */}
 
               <div className={styles.content_item}>
                 <h2 className={`${styles.title} text-gradient`}>Образование</h2>
