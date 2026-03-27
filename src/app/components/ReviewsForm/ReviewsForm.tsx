@@ -11,7 +11,7 @@ interface FormData {
   phone: string;
   name: string;
   policy: boolean;
-  age?: string;
+  email?: string;
   time?: string;
   doctor?: string;
   review_text?: string;
@@ -26,8 +26,8 @@ export async function sendReviewsService(reviewsData: FormData) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        data: { ...reviewsData }
-      })
+        data: { ...reviewsData },
+      }),
     });
     console.log("reviewsData", reviewsData);
     const data = await response.json();
@@ -69,14 +69,16 @@ export default function ReviewsForm() {
         rating: rating,
         name: formData.name,
         phone: formData.phone,
-        age: formData.age,
-        time: formData.time || '',
-        doctor: formData.doctor || '',
+        email: formData.email,
+        time: formData.time || "",
+        doctor: formData.doctor || "",
         review_text: formData.review_text,
         active: false,
       };
 
-      const { response, data } = await sendReviewsService(reviewsData as unknown as FormData);
+      const { response, data } = await sendReviewsService(
+        reviewsData as unknown as FormData,
+      );
 
       if (response.ok) {
         setIsSuccess(true);
@@ -85,7 +87,6 @@ export default function ReviewsForm() {
       } else {
         setError("Ошибка запроса, попробуйте позже");
       }
-
     } catch (err) {
       setError("Ошибка запроса, попробуйте позже");
       setSending(false);
@@ -141,6 +142,20 @@ export default function ReviewsForm() {
 
       <div className={styles.input_wrapper}>
         <input
+          placeholder="Введите email"
+          {...register("email", {
+            required: { value: true, message: "Введите email" },
+          })}
+          className={styles.form__input}
+          type="email"
+        />
+        <div className={styles.input_text_error}>
+          {errors["email"] && errors["email"].message}
+        </div>
+      </div>
+
+      {/* <div className={styles.input_wrapper}>
+        <input
           placeholder="Введите возраст"
           {...register("age", {
             required: { value: true, message: "Введите возраст" },
@@ -151,7 +166,7 @@ export default function ReviewsForm() {
         <div className={styles.input_text_error}>
           {errors["age"] && errors["age"].message}
         </div>
-      </div>
+      </div> */}
 
       {/* Дата и время приема */}
       {rating <= 3 && (

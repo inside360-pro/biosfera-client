@@ -30,51 +30,15 @@ export async function generateMetadata() {
 }
 
 export default async function Patients() {
-  let page: PageResponse | null = null;
-
-  try {
-    page = await fetchData<PageResponse>(apiUrl);
-  } catch (error) {
-    console.error("Ошибка при загрузке данных:", error);
-  }
-
-  if (!page?.data) {
-    return notFound();
-  }
-
-  const documents = page?.data?.documents;
-
   return (
     <main className="container">
-      <Breadcrumbs secondLabel={page?.data?.title ?? "Пациентам"} />
+      <Breadcrumbs secondLabel={"Программа лояльности"} />
 
       <div className={styles.page_wrapper}>
         <SideBarMenu />
         <div className={styles.content} id="section">
-          <h1 className={styles.content__title}>Документы</h1>
-          <ul className={styles.documents__list}>
-            {documents?.map((item: any) => (
-              <li className={styles.documents__item} key={item?.id}>
-                <a
-                  href={
-                    item?.document?.url
-                      ? `${process.env.NEXT_PUBLIC_API_SERVER}${item?.document?.url}`
-                      : "#"
-                  }
-                  target={item?.document?.url ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/icons/document_icon.svg"
-                    alt="icon"
-                    width={30}
-                    height={30}
-                  />
-                  <span>{item?.title}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <h1>Программа лояльности</h1>
+          <p>Здесь пока ничего нет, но скоро будет.</p>
         </div>
       </div>
     </main>

@@ -7,6 +7,7 @@ import { initPhoneMask } from "@/app/utils/phone-mask";
 interface FormData {
   phone: string;
   name: string;
+  email: string;
   question: string;
   policy: boolean;
 }
@@ -23,6 +24,7 @@ export default function PriceForm() {
     defaultValues: {
       phone: "", // Инициализируем phone пустой строкой
       name: "", // Инициализируем name пустой строкой
+      email: "", // Инициализируем email пустой строкой
       question: "", // Инициализируем question пустой строкой
       policy: false, // Инициализируем policy false
     },
@@ -117,6 +119,20 @@ export default function PriceForm() {
           <div className={styles.input_text_error}>
             {errors["phone"] && errors["phone"].message}
           </div>
+        </div>
+      </div>
+
+      <div className={`${styles.input_wrapper}`}>
+        <input
+          placeholder="Введите email"
+          {...register("email", {
+            required: { value: true, message: "Введите email" },
+          })}
+          className={styles.form__input}
+          type="email"
+        />
+        <div className={styles.input_text_error}>
+          {errors["email"] && errors["email"].message}
         </div>
       </div>
 

@@ -15,28 +15,33 @@ type MenuItem = {
 
 const items: MenuItem[] = [
   {
-    label: "Документы",
-    href: "/patients",
-    scrollToId: "section",
-  },
-  {
-    label: "Юридические данные",
-    href: "/patients/yuridicheskie-dannye",
-    scrollToId: "section",
-  },
-  {
-    label: "Лицензии",
-    href: "/patients/licenzii",
-    scrollToId: "section",
-  },
-  {
     label: "Программа лояльности",
     href: "/patients/programma-loyalnosti",
     scrollToId: "section",
   },
   {
+    label: "Документы на налоговый вычет",
+    href: "/patients/dokumenty-na-nalogovyy-vychet",
+    scrollToId: "section",
+  },
+  {
+    label: "Обслуживание по ДМС",
+    href: "/patients/obsluzhivanie-po-dms",
+    scrollToId: "section",
+  },
+  {
     label: "Полезные материалы",
     href: "/patients/poleznye-materialy",
+    scrollToId: "section",
+  },
+  {
+    label: "Мобильное приложение (МедТочка)",
+    href: "/patients/otzyvy",
+    scrollToId: "section",
+  },
+  {
+    label: "Лицензии",
+    href: "/patients/licenzii",
     scrollToId: "section",
   },
   {
@@ -52,21 +57,6 @@ const items: MenuItem[] = [
   {
     label: "Карта парковок",
     href: "/patients/karta-parkovok",
-    scrollToId: "section",
-  },
-  {
-    label: "Обслуживание по ДМС",
-    href: "/patients/obsluzhivanie-po-dms",
-    scrollToId: "section",
-  },
-  {
-    label: "Документы на налоговый вычет",
-    href: "/patients/dokumenty-na-nalogovyy-vychet",
-    scrollToId: "section",
-  },
-  {
-    label: "Мобильное приложение (МедТочка)",
-    href: "/patients/otzyvy",
     scrollToId: "section",
   },
 ];

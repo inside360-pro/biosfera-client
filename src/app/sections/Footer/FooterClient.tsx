@@ -53,7 +53,7 @@ const FOOTER_NAV = [
   {
     title: "Пациентам",
     links: [
-      { label: "Правовая информация", href: "/patients/yuridicheskie-dannye" },
+      { label: "Правовая информация", href: "/pravovaya-informaciya" },
       { label: "Лицензии", href: "/patients/licenzii" },
       {
         label: "Подписание договора онлайн",

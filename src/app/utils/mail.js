@@ -22,6 +22,7 @@ async function sendEmail(body) {
       html: `
       <b>Имя:</b> ${body.name}<br>
       <b>Телефон:</b> ${body.phone}<br>
+      <b>Email:</b> ${body.email}<br>
       ${body.question ? `<b>Сообщение:</b> ${body.question}<br>` : ''}
       `
       ,

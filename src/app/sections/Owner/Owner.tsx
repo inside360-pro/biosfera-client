@@ -1,12 +1,51 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { usePopupStore } from "@/app/store/popupStore";
-import { AnimateElement } from "@/app/components";
+import { useRouter } from "next/navigation";
+import { AnimateElement, ContentRenderer } from "@/app/components";
+import fetchData from "@/app/utils/fetchData";
+import type { ContentItem } from "@/app/components/ContentRenderer/ContentRenderer";
 import styles from "./style.module.scss";
 
+type OwnerData = {
+  name?: string;
+  job_title?: string;
+  text?: ContentItem[];
+  image?: { url?: string | null } | null;
+};
+
+type OwnerResponse = { data?: OwnerData };
+
+const apiUrl = `api/sekcziya-glavnyj-vrach?populate=*`;
+
 export default function Owner() {
-  const { togglePopupState } = usePopupStore();
+  const [owner, setOwner] = useState<OwnerData | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchOwner = async () => {
+      const response = await fetchData<OwnerResponse>(apiUrl);
+      setOwner(response?.data ?? null);
+    };
+    fetchOwner();
+  }, []);
+
+  const scrollToForm = () => {
+    const formElement = document.getElementById("biosphera-form");
+    if (!formElement) {
+      router.push("/about#biosphera-form");
+      return;
+    }
+
+    formElement.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_SERVER ?? "";
+  const ownerImageSrc =
+    owner?.image?.url != null && owner.image.url !== ""
+      ? `${apiBaseUrl}${owner.image.url}`
+      : "/placeholder1.svg";
 
   return (
     <section className={styles.owner}>
@@ -23,34 +62,13 @@ export default function Owner() {
           </div>
 
           <div className={styles.owner__descriptions}>
-            <AnimateElement element="p">
-              Каждый день я вижу, с какими сомнениями и вопросами люди приходят
-              в клинику. Именно поэтому для нас так важно не просто поставить
-              диагноз, а подробно объяснить, что происходит и какие шаги
-              действительно помогут.
-            </AnimateElement>
-
-            <AnimateElement element="p" animationDelay={50}>
-              В «Биосфере ДВ» мы работаем командой — врачи, диагностика,
-              сопровождение. Мы не торопим пациента и не принимаем решений
-              вслепую. Наша цель — чтобы после визита у вас осталось не чувство
-              тревоги, а понимание и уверенность в дальнейших действиях.
-            </AnimateElement>
-
-            <AnimateElement
-              element="p"
-              animationDelay={100}
-              className="text-gradient"
-            >
-              Мы берём ответственность за рекомендации, которые даём, и за
-              результат, к которому ведём пациента.
-            </AnimateElement>
+            <ContentRenderer content={owner?.text ?? []} />
           </div>
 
           <AnimateElement animationName="fadeRight" animationDelay={150}>
             <div className={styles.owner__image}>
               <Image
-                src="/images/image.webp"
+                src={ownerImageSrc}
                 className="dsv-image"
                 alt="Owner"
                 width={439}
@@ -60,17 +78,15 @@ export default function Owner() {
           </AnimateElement>
 
           <div className={styles.owner__content}>
-            <h3 className={styles.owner__title}>
-              Бурдуковская Наталья Викторовна
-            </h3>
-            <p className={styles.owner__position}>Главный врач</p>
+            <h3 className={styles.owner__title}>{owner?.name}</h3>
+            <p className={styles.owner__position}>{owner?.job_title}</p>
           </div>
 
           <div className={styles.owner__button}>
             <button
               type="button"
               className={styles.primary_button}
-              onClick={togglePopupState}
+              onClick={scrollToForm}
             >
               Задать вопрос главному врачу
             </button>

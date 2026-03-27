@@ -6,11 +6,35 @@ import Image from "next/image";
 import { usePopupStore } from "@/app/store/popupStore";
 import { AnimateElement } from "@/app/components";
 import styles from "./style.module.scss";
+import fetchData from "@/app/utils/fetchData";
+
+type HeroSectionData = {
+  title?: string;
+  text_1?: string;
+  text_2?: string;
+  text_3?: string;
+  image?: { url?: string | null } | null;
+};
+
+type HeroResponse = {
+  data?: HeroSectionData;
+};
+
+const apiUrl = `/api/sekcziya-glavnaya?populate=*`;
 
 export default function Hero() {
-  const [miniPopupClosed, setMiniPopupClosed] = useState(true);
   const { togglePopupState } = usePopupStore();
+  const [heroData, setHeroData] = useState<HeroSectionData | null>(null);
 
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await fetchData<HeroResponse>(apiUrl);
+      setHeroData(response?.data ?? null);
+    };
+    loadData();
+  }, []);
+
+  // const [miniPopupClosed, setMiniPopupClosed] = useState(true);
   // отключаем мин-попап на время
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -20,16 +44,20 @@ export default function Hero() {
   //   return () => clearTimeout(timer);
   // }, []);
 
-  const miniPopupCloseHandler = () => {
-    setMiniPopupClosed(true);
-    togglePopupState();
-  };
+  // const miniPopupCloseHandler = () => {
+  //   setMiniPopupClosed(true);
+  //   togglePopupState();
+  // };
 
   return (
     <section>
       <div className={styles.hero_wrapper}>
         <Image
-          src="/images/hero-bg.webp"
+          src={
+            heroData?.image?.url
+              ? process.env.NEXT_PUBLIC_API_SERVER + heroData.image.url
+              : "/images/hero-bg.webp"
+          }
           alt="bg-image"
           width={1740}
           height={766}
@@ -42,7 +70,7 @@ export default function Hero() {
             animationName="fadeUp"
             className={styles.hero_title}
           >
-            «Биосфера ДВ» — забота о&nbsp;вашем здоровье на всех этапах
+            {heroData?.title}
           </AnimateElement>
           <AnimateElement animationDelay={100}>
             <button
@@ -62,7 +90,7 @@ export default function Hero() {
             width={30}
             height={30}
           />
-          <p>Комфортный приём без очередей и потери времени</p>
+          <p>{heroData?.text_1}</p>
         </div>
         <div className={`${styles.hero_ladel} ${styles.hero_ladel_2}`}>
           <Image
@@ -71,7 +99,7 @@ export default function Hero() {
             width={30}
             height={30}
           />
-          <p>Точная диагностика без лишних назначений</p>
+          <p>{heroData?.text_2}</p>
         </div>
         <div className={`${styles.hero_ladel} ${styles.hero_ladel_3}`}>
           <Image
@@ -80,7 +108,7 @@ export default function Hero() {
             width={30}
             height={30}
           />
-          <p>Врачи, которые разбираются в&nbsp;причине, а не лечат симптомы</p>
+          <p>{heroData?.text_3}</p>
         </div>
 
         <button

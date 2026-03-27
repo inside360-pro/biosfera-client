@@ -17,8 +17,7 @@ export default function SliderServices({ items }: { items: SliderItemType[] }) {
   return (
     <div className={`${styles.wrapper}`}>
       <Swiper>
-        {items &&
-          items.map((slide) => (
+        {items?.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div className={styles.slider__item}>
                 <div className="container">
