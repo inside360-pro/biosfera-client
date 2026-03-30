@@ -73,9 +73,9 @@ export default function ContentPage(props: ContactsContentProps) {
                 rel="noopener noreferrer"
               >
                 <img
-                  src="https://prodoctorov.ru/rating/widget/recommend/112840/240.png"
-                  title="ПроДокторов - Медицинский центр «Биосфера ДВ», Владивосток"
-                  alt="ПроДокторов - Медицинский центр «Биосфера ДВ», Владивосток"
+                  src="https://prodoctorov.ru/rating/112840/"
+                  title="Рейтинг - Медицинский центр «Биосфера ДВ»"
+                  alt="Рейтинг - Медицинский центр «Биосфера ДВ»"
                 />
               </a>
             </div>

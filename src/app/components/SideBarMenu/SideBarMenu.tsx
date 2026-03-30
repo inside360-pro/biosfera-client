@@ -20,7 +20,11 @@ const items: MenuItem[] = [
     scrollToId: "section",
   },
   {
-    label: "Документы на налоговый вычет",
+    label: "Отзывы",
+    href: "/reviews",
+  },
+  {
+    label: "Налоговый вычет",
     href: "/patients/dokumenty-na-nalogovyy-vychet",
     scrollToId: "section",
   },
@@ -45,20 +49,20 @@ const items: MenuItem[] = [
     scrollToId: "section",
   },
   {
-    label: "Контролирующие органы",
-    href: "/patients/kontroliruyushchie-organi",
-    scrollToId: "section",
-  },
-  {
     label: "Подписание договора онлайн",
     href: "/patients/podpisanie-dogovora-onlayn",
     scrollToId: "section",
   },
   {
-    label: "Карта парковок",
-    href: "/patients/karta-parkovok",
+    label: "Контролирующие органы",
+    href: "/patients/kontroliruyushchie-organi",
     scrollToId: "section",
   },
+  // {
+  //   label: "Карта парковок",
+  //   href: "/patients/karta-parkovok",
+  //   scrollToId: "section",
+  // },
 ];
 
 const scrollToElement = (id: string, onSuccess?: () => void) => {
@@ -125,7 +129,7 @@ export default function SideBarMenu() {
       <ul className={styles.menu__list}>
         {items.map((item) => (
           <li className={styles.menu__item} key={item.label}>
-            <Link
+            <a
               href={item.href}
               className={pathname === item.href ? "text-gradient" : ""}
               onClick={(e) => handleLinkClick(e, item)}
@@ -159,7 +163,7 @@ export default function SideBarMenu() {
                   </defs>
                 </svg>
               )}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>

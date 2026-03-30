@@ -6,14 +6,15 @@ import { ReviewsPopup, StarRating, LoadingText } from "@/app/components";
 import fetchData from "@/app/utils/fetchData";
 import styles from "./style.module.scss";
 import formatDate from "@/app/utils/formatDate";
+import Script from "next/script";
 
 export type ReviewsItem = {
-  name?: string,
-  age?: string,
-  review_text?: string,
-  rating?: number,
-  date?: string,
-  publishedAt?: string,
+  name?: string;
+  age?: string;
+  review_text?: string;
+  rating?: number;
+  date?: string;
+  publishedAt?: string;
 };
 
 export type ReviewsPageData = {
@@ -28,9 +29,9 @@ export type ReviewsResponse = {
       pageSize: number;
       pageCount: number;
       total: number;
-    }
+    };
   };
-}
+};
 
 export default function ContentPage() {
   const [active, setActive] = useState<boolean>(false);
@@ -46,8 +47,8 @@ export default function ContentPage() {
   const PAGE_SIZE: number = 2; // количество отзывов на странице
   const [page, setPage] = useState<number>(1);
   const handleLoadMore = () => {
-    setPage(prev => prev + 1);
-  }
+    setPage((prev) => prev + 1);
+  };
 
   useEffect(() => {
     const loadData = async (): Promise<void> => {
@@ -58,16 +59,16 @@ export default function ContentPage() {
           `?populate=*` +
           `&filters[active][$eq]=true` +
           `&pagination[page]=${page}&pagination[pageSize]=${PAGE_SIZE}` +
-          `&sort=createdAt:desc`
-          ;
+          `&sort=createdAt:desc`;
 
         const newReviews: ReviewsResponse = await fetchData(url);
-        setReviews(prev => (page === 1 ? newReviews.data : [...prev, ...newReviews.data]));
+        setReviews((prev) =>
+          page === 1 ? newReviews.data : [...prev, ...newReviews.data],
+        );
         setHasMore(page < newReviews.meta.pagination.pageCount);
         setIsLoading(false);
-
       } catch (error) {
-        console.error('Произошла ошибка загрузки отзывов', error);
+        console.error("Произошла ошибка загрузки отзывов", error);
       }
     };
 
@@ -83,48 +84,103 @@ export default function ContentPage() {
               <span className="text-gradient">Что говорят </span>
               наши пациенты
             </h1>
-            <button className={styles.button} onClick={() => setActive(true)}>Оставить отзыв</button>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={() => setActive(true)}
+            >
+              Оставить отзыв
+            </button>
           </header>
-          <p className={styles.text}>Мы ценим доверие наших пациентов и внимательно относимся к каждому отзыву. Обратная связь помогает нам становиться лучше и поддерживать высокий уровень медицинской помощи и сервиса.</p>
-
+          <p className={styles.text}>
+            Мы ценим доверие наших пациентов и внимательно относимся к каждому
+            отзыву. Обратная связь помогает нам становиться лучше и поддерживать
+            высокий уровень медицинской помощи и сервиса.
+          </p>
 
           {isLoading && reviews.length === 0 && (
             <LoadingText className={styles.text} />
           )}
           <ul className={styles.reviews_list}>
-            {reviews && reviews.length > 0 && reviews.map((item, index) => (
-              <li className={styles.reviews_item} key={`${item?.name}-${index ?? 0}`}>
-                <Image
-                  className="dsv-image"
-                  src={"/icons/quotes.svg"}
-                  alt="quotes"
-                  width={39}
-                  height={35}
-                />
-                <div>
-                  <div className={styles.name}>{item?.name}, <span>{item?.age}</span></div>
-                  <p className={styles.reviews_text}>{item?.review_text}</p>
-                </div>
-                <footer className={styles.reviews_item__footer}>
-                  <span className={styles.reviews_item__date}>{formatDate(item.publishedAt)}</span>
-                  <StarRating setRating={setRating} rating={item?.rating} />
-                </footer>
-              </li>
-            ))}
+            {reviews &&
+              reviews.length > 0 &&
+              reviews.map((item, index) => (
+                <li
+                  className={styles.reviews_item}
+                  key={`${item?.name}-${index ?? 0}`}
+                >
+                  <Image
+                    className="dsv-image"
+                    src={"/icons/quotes.svg"}
+                    alt="quotes"
+                    width={39}
+                    height={35}
+                  />
+                  <div>
+                    <div className={styles.name}>
+                      {item?.name}, <span>{item?.age}</span>
+                    </div>
+                    <p className={styles.reviews_text}>{item?.review_text}</p>
+                  </div>
+                  <footer className={styles.reviews_item__footer}>
+                    <span className={styles.reviews_item__date}>
+                      {formatDate(item.publishedAt)}
+                    </span>
+                    <StarRating setRating={setRating} rating={item?.rating} />
+                  </footer>
+                </li>
+              ))}
           </ul>
-
-          {
-            hasMore &&
-            <button
-              onClick={handleLoadMore}
-              className={styles.button}
-            >
-              {isLoading ? 'загрузка...' : 'загрузить еще'}
+          {hasMore && (
+            <button onClick={handleLoadMore} className={styles.button}>
+              {isLoading ? "загрузка..." : "загрузить еще"}
             </button>
-          }
-
+          )}
         </div>
       </section>
+
+      <section className={`${styles.reviews} ${styles.section}`}>
+        <div className="container">
+          <div id="pd_widget_big" data-lpu="112840">
+            <div className="pd_rate_header">
+              Отзывы о медицинском центре «Биосфера ДВ»
+              <br />
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pd_rate_new"
+                href="https://prodoctorov.ru/new/rate/lpu/112840/"
+              >
+                Оставить отзыв
+              </a>
+            </div>
+            <div id="pd_widget_big_content"></div>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pd_read_all"
+              href="https://prodoctorov.ru/vladivostok/lpu/112840-medicinskiy-centr-biosfera-dv/#otzivi"
+            >
+              Читать все отзывы
+            </a>
+            <span id="pd_powered_by">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://prodoctorov.ru"
+              >
+                <img
+                  className="pd_logo"
+                  src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png"
+                  alt="logo"
+                />
+              </a>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <Script defer src="https://prodoctorov.ru/static/js/widget_big.js?v7" />
 
       <ReviewsPopup setActive={setActive} active={active} />
     </>
