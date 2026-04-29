@@ -143,9 +143,9 @@ export default function FooterClient(props: FooterClientProps) {
               </Link>
               <div className={styles.footer__license}>
                 <span className={styles.footer__license_label}>Лицензия</span>
-                <a href="https://" className={styles.footer__license_link}>
+                <p className={styles.footer__license_link}>
                   №Л041-01023-25/04107306
-                </a>
+                </p>
                 <span className={styles.footer__license_date}>
                   от 29.12.2025
                 </span>
@@ -255,7 +255,8 @@ export default function FooterClient(props: FooterClientProps) {
 
           <div className={styles.footer__bottom_inner}>
             <div className={styles.footer__copyright}>
-              © 2026. ООО «Биосфера ДВ». <br /> Все права защищены
+              © {new Date().getFullYear()}. ООО «Биосфера ДВ». <br /> Все права
+              защищены
             </div>
 
             <div className={styles.footer__emblems}>

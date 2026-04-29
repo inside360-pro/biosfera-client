@@ -25,3 +25,13 @@
         padding: 30px 0;
     }
 }
+
+.costs {
+    @include adaptiv-value("margin-top", 50, 30);
+}
+
+.costs__title {
+    @include adaptiv-value("font-size", 46, 26);
+    font-weight: 600;
+    margin-bottom: 30px;
+}

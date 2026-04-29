@@ -5,10 +5,10 @@ import formatDate from "@/app/utils/formatDate";
 import styles from "../style.module.scss";
 import Breadcrumbs from "@/app/components/Breadcrumbs/Breadcrumbs";
 import type { NewsItemType } from "@/app/types";
+import CostItemMed from "@/app/components/CostItemMed/CostItemMed";
 import { notFound } from "next/navigation";
 import { ContentRenderer, NewsCard } from "@/app/components";
 import type { ContentItem } from "@/app/components/ContentRenderer/ContentRenderer";
-import CostItemMed from "@/app/components/CostItemMed/CostItemMed";
 import Image from "next/image";
 import { Doctors } from "@/app/sections";
 
@@ -79,10 +79,10 @@ export default async function Page({
   // тут получаем цены услуг из медифлекса по клинике (lpu_id)
   // https://api.medflex.ru/services/prices/?lpu_id=**********
 
-  const prices = await fetchMedflexData<MedflexPricesResponse>(
-    `/services/prices/?lpu_id=${process.env.NEXT_PUBLIC_CLINIC_ID}`,
-  );
-  const services = prices.data?.services ?? [];
+  // const prices = await fetchMedflexData<MedflexPricesResponse>(
+  //   `/services/prices/?lpu_id=${process.env.NEXT_PUBLIC_CLINIC_ID}`,
+  // );
+  // const services = prices.data?.services ?? [];
 
   // Запрос на получение всех новостей отфильтрованных по isRecommended = true
   const recommendedNews = await fetchData<ApiListResponse<NewsItemType>>(
@@ -131,7 +131,7 @@ export default async function Page({
         </article>
       </div>
 
-      <section className={`${styles.costs} ${styles.section}`}>
+      {/* <section className={`${styles.costs} ${styles.section}`}>
         <div className="container">
           <header className={styles.costs__header}>
             <h2 className={styles.costs__title}>
@@ -146,7 +146,7 @@ export default async function Page({
             ))}
           </ul>
         </div>
-      </section>
+      </section> */}
 
       <Doctors />
 
@@ -158,8 +158,8 @@ export default async function Page({
           <div className={styles.list}>
             {recommendedNewsData && recommendedNewsData.length > 0
               ? recommendedNewsData.map((item: NewsItemType) => (
-                <NewsCard key={item.id} data={item} />
-              ))
+                  <NewsCard key={item.id} data={item} />
+                ))
               : "Не удалось загрузить новости"}
           </div>
         </div>
