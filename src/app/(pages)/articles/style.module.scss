@@ -1,0 +1,137 @@
+// @include adaptiv-value("font-size", 16, 13);
+// @use "../../mixins" as *;
+@use "@app/mixins" as *;
+
+.title {
+    @include adaptiv-value("font-size", 46, 26);
+    margin-bottom: 30px;
+}
+
+.section {
+    @include adaptiv-value("margin-top", 100, 30);
+}
+
+.news {
+    .news__title {
+        @include adaptiv-value("font-size", 18, 16);
+        margin-bottom: 30px;
+        color: var(--color-gray);
+    }
+}
+
+.list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+
+    @media(max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    @media(max-width: 560px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+.article {
+    margin-top: 30px;
+}
+
+.article__hero {
+    position: relative;
+}
+
+.article__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 30px;
+    margin-top: 80px;
+
+    @media(max-width: 768px) {
+        grid-template-columns: 1fr;
+        margin-top: 40px;
+    }
+}
+
+.article__author {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+    min-width: 0;
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+
+    h2 {
+        color: #3170b4;
+        font-size: 32px;
+        margin-bottom: 24px;
+    }
+
+    > div {
+        height: auto;
+    }
+
+    @media(max-width: 768px) {
+        position: static;
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+.article__info { grid-column: 2; min-width: 0; }
+
+@media(max-width: 768px) {
+    .article__info { grid-column: 1; }
+}
+
+.article__image {
+    border-radius: 20px;
+    overflow: hidden;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3.1 / 1;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    @media(max-width: 768px) { img { aspect-ratio: 16 / 9; } }
+}
+
+.article__date {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--white);
+
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.2;
+
+    backdrop-filter: blur(100px);
+    background: linear-gradient(90deg, #3170b4 0%, #5cccc2 100%);
+
+    border-radius: 100px;
+
+    padding: 10px 20px;
+}
+
+.article__title {
+    @include adaptiv-value("font-size", 36, 26);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.costs {
+    @include adaptiv-value("margin-top", 100, 30);
+}
+
+.costs__title {
+    @include adaptiv-value("font-size", 46, 26);
+    font-weight: 600;
+    margin-bottom: 30px;
+}
