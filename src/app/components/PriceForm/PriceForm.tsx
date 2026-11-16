@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import styles from "./style.module.scss";
 import { useState } from "react";
 import { initPhoneMask } from "@/app/utils/phone-mask";
+import ServiceField from "@/app/components/ServiceField/ServiceField";
 
 interface FormData {
   phone: string;
@@ -10,6 +11,7 @@ interface FormData {
   email: string;
   question: string;
   policy: boolean;
+  service: string;
 }
 
 export default function PriceForm() {
@@ -27,6 +29,7 @@ export default function PriceForm() {
       email: "", // Инициализируем email пустой строкой
       question: "", // Инициализируем question пустой строкой
       policy: false, // Инициализируем policy false
+      service: "",
     },
   });
 
@@ -70,6 +73,7 @@ export default function PriceForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <ServiceField register={register} />
       <header className={styles.form__header}>
         <h2>
           Есть <span className="text-gradient">вопросы?</span>

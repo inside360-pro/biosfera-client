@@ -95,6 +95,12 @@ function passportData(body) {
   return data;
 }
 
+function isServiceFilled(value) {
+  if (value === undefined || value === null || value === "") return false;
+  if (typeof value === "string") return value.trim() !== "";
+  return true;
+}
+
 function badRequest() {
   return Response.json({ message: "Проверьте поля формы" }, { status: 400 });
 }
@@ -116,6 +122,13 @@ export async function POST(request) {
 
   if (!body || typeof body !== "object" || Array.isArray(body)) {
     return badRequest();
+  }
+
+  if (isServiceFilled(body.service)) {
+    return Response.json({
+      accepted: [],
+      message: "Письмо успешно отправлено",
+    });
   }
 
   try {

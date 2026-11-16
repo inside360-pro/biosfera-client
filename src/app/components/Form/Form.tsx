@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import styles from "./style.module.scss";
 import { useState } from "react";
 import { initPhoneMask } from "@/app/utils/phone-mask";
+import ServiceField from "@/app/components/ServiceField/ServiceField";
 
 interface FormData {
   phone: string;
   name: string;
   email: string;
   policy: boolean;
+  service: string;
 }
 
 export default function Form() {
@@ -25,6 +27,7 @@ export default function Form() {
       name: "", // Инициализируем name пустой строкой
       email: "", // Инициализируем email пустой строкой
       policy: false, // Инициализируем policy false
+      service: "",
     },
   });
 
@@ -68,6 +71,7 @@ export default function Form() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <ServiceField register={register} />
       <h2>Оставьте заявку</h2>
       <p className={styles.subtitle}>Мы свяжемся с вами в ближайшее время</p>
       <div className={styles.input_wrapper}>

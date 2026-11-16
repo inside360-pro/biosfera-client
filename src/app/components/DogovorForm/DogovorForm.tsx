@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { initPhoneMask } from "@/app/utils/phone-mask";
 import styles from "./style.module.scss";
+import ServiceField from "@/app/components/ServiceField/ServiceField";
 
 interface FormData {
   phone: string;
@@ -20,6 +21,7 @@ interface FormData {
   address_of_residence?: string | null;
   policy1?: boolean;
   policy2?: boolean;
+  service?: string;
 }
 
 export default function DogovorForm() {
@@ -46,6 +48,7 @@ export default function DogovorForm() {
       address_of_residence: "", // Инициализируем address_of_residence пустой строкой
       policy1: false, // Инициализируем policy1 false
       policy2: false, // Инициализируем policy1 false
+      service: "",
     },
   });
 
@@ -117,6 +120,7 @@ export default function DogovorForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <ServiceField register={register} />
       {step === 1 && (
         <div className={styles.form_step_1} ref={step1Ref}>
           <p className={styles.subtitle}>
