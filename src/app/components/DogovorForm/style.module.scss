@@ -3,6 +3,8 @@
 @use "@app/mixins" as *;
 
 .form {
+    position: relative;
+
     h2 {
         color: #171717;
         margin-bottom: 20px;

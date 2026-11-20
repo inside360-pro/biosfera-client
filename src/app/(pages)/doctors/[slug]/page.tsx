@@ -8,6 +8,13 @@ import type { ContentItem } from "@/app/components/ContentRenderer/ContentRender
 import styles from "./style.module.scss";
 // import ProdoctorovFooterWidget from "@/app/components/ProdoctorovFooterWidget/ProdoctorovFooterWidget";
 
+type DoctorAward = {
+  id?: number;
+  title?: string;
+  service?: string;
+  icon?: { url?: string; alternativeText?: string | null };
+};
+
 type DoctorItem = {
   main_photo?: { url?: string };
   name?: string;
@@ -23,6 +30,7 @@ type DoctorItem = {
   skills?: ContentItem[];
   education?: ContentItem[];
   accreditation?: ContentItem[];
+  awards?: DoctorAward[];
 };
 
 type PageResponse = {
@@ -71,7 +79,7 @@ export default async function Page({
 
   try {
     page = await fetchData<PageResponse>(
-      `/api/vrachis?filters[slug][$eq]=${slug}&populate=*`,
+      `/api/vrachis?filters[slug][$eq]=${slug}&populate[main_photo]=true&populate[awards][populate][icon]=true`,
     );
   } catch {
     return notFound();
@@ -84,6 +92,9 @@ export default async function Page({
   const imageSrc = data?.main_photo?.url
     ? `${domain}${data?.main_photo?.url}`
     : "/placeholder1.svg";
+  const awards = (data?.awards ?? []).filter(
+    (award) => award.title || award.service || award.icon?.url,
+  );
 
   return (
     <main>
@@ -148,6 +159,43 @@ export default async function Page({
               >
                 Записаться на прием
               </a>
+
+              {awards.length > 0 && (
+                <ul className={styles.awards}>
+                  {awards.map((award, index) => {
+                    const iconSrc = award.icon?.url
+                      ? `${domain}${award.icon.url}`
+                      : "";
+
+                    return (
+                      <li
+                        key={award.id ?? `${award.title}-${index}`}
+                        className={styles.award}
+                      >
+                        {iconSrc && (
+                          <img
+                            className={styles.award_icon}
+                            src={iconSrc}
+                            alt={award.icon?.alternativeText || ""}
+                            width={56}
+                            height={56}
+                          />
+                        )}
+                        <div>
+                          {award.title && (
+                            <p className={styles.award_title}>{award.title}</p>
+                          )}
+                          {award.service && (
+                            <p className={styles.award_service}>
+                              {award.service}
+                            </p>
+                          )}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </div>
 
             <div className={styles.content}>

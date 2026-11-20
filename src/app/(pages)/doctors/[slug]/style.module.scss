@@ -74,6 +74,45 @@
     margin-bottom: 30px;
 }
 
+.awards {
+    list-style: none;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 450px;
+}
+
+.award {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #f4f7fb;
+    border: 1px solid #e0e7ef;
+}
+
+.award_icon {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.award_title {
+    font-weight: 600;
+    @include adaptiv-value("font-size", 16, 14);
+    line-height: 1.35;
+}
+
+.award_service {
+    margin-top: 6px;
+    color: #858f9c;
+    @include adaptiv-value("font-size", 14, 13);
+    line-height: 1.3;
+}
+
 .button {
     display: inline-block;
     background: var(--button-gradient);
