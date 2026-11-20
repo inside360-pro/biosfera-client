@@ -52,6 +52,7 @@ const menuLinks = [
   { title: "Врачи", url: "/doctors" },
   { title: "Акции ", url: "/promo" },
   { title: "Пациентам", url: "/patients" },
+  { title: "Статьи", url: "/articles" },
   { title: "Новости", url: "/news" },
   { title: "О центре", url: "/about" },
   { title: "Контакты", url: "/contacts" },
