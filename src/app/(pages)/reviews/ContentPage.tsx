@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ReviewsPopup, StarRating, LoadingText } from "@/app/components";
+import Script from "next/script";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { LoadingText, ReviewsPopup, StarRating } from "@/app/components";
 import fetchData from "@/app/utils/fetchData";
 import styles from "./style.module.scss";
-import formatDate from "@/app/utils/formatDate";
-import Script from "next/script";
 
 export type ReviewsItem = {
   name?: string;
@@ -14,6 +13,7 @@ export type ReviewsItem = {
   review_text?: string;
   rating?: number;
   date?: string;
+  platform?: string;
   publishedAt?: string;
 };
 
@@ -33,9 +33,72 @@ export type ReviewsResponse = {
   };
 };
 
+function ReviewText({ text }: { text?: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const [overflow, setOverflow] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useLayoutEffect(() => {
+    const el = textRef.current;
+    if (!el || !text) return;
+
+    const measure = () => {
+      if (expanded) return;
+
+      const computed = getComputedStyle(el);
+      const probe = document.createElement("p");
+      probe.textContent = text;
+      probe.style.cssText = [
+        "position:absolute",
+        "visibility:hidden",
+        "pointer-events:none",
+        `width:${el.clientWidth}px`,
+        `font:${computed.font}`,
+        `line-height:${computed.lineHeight}`,
+        `letter-spacing:${computed.letterSpacing}`,
+        `word-break:${computed.wordBreak}`,
+        `white-space:${computed.whiteSpace}`,
+      ].join(";");
+      document.body.appendChild(probe);
+      const lineHeight = parseFloat(computed.lineHeight) || 0;
+      const limit = lineHeight * 10;
+      setOverflow(probe.scrollHeight > limit + 1);
+      probe.remove();
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [text, expanded]);
+
+  if (!text) return null;
+
+  return (
+    <>
+      <p
+        ref={textRef}
+        className={`${styles.reviews_text}${expanded ? ` ${styles.reviews_text_expanded}` : ""}`}
+      >
+        {text}
+      </p>
+      {overflow && (
+        <button
+          type="button"
+          className={styles.reviews_more}
+          aria-expanded={expanded}
+          onClick={() => setExpanded((prev) => !prev)}
+        >
+          {expanded ? "Свернуть" : "Читать полностью"}
+        </button>
+      )}
+    </>
+  );
+}
+
 export default function ContentPage() {
   const [active, setActive] = useState<boolean>(false);
-  const [rating, setRating] = useState<number>(5);
+  const [, setRating] = useState<number>(5);
 
   const [reviews, setReviews] = useState<ReviewsItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -44,7 +107,7 @@ export default function ContentPage() {
   const domain = process.env.NEXT_PUBLIC_DOMAIN ?? "";
 
   // для пагинации
-  const PAGE_SIZE: number = 2; // количество отзывов на странице
+  const PAGE_SIZE: number = 4; // количество отзывов на странице
   const [page, setPage] = useState<number>(1);
   const handleLoadMore = () => {
     setPage((prev) => prev + 1);
@@ -73,7 +136,7 @@ export default function ContentPage() {
     };
 
     loadData();
-  }, [page]);
+  }, [page, domain]);
 
   return (
     <>
@@ -118,21 +181,31 @@ export default function ContentPage() {
                   />
                   <div>
                     <div className={styles.name}>
-                      {item?.name}, <span>{item?.age}</span>
+                      {item?.name}
+                      <span>{item.age ? `, ${item.age}` : ""}</span>
                     </div>
-                    <p className={styles.reviews_text}>{item?.review_text}</p>
+                    <ReviewText text={item?.review_text} />
                   </div>
                   <footer className={styles.reviews_item__footer}>
-                    <span className={styles.reviews_item__date}>
-                      {formatDate(item.publishedAt)}
-                    </span>
+                    <div className={styles.reviews_item__date_wrapper}>
+                      <p className={styles.reviews_item__date}>{item?.date}</p>
+                      <p className={styles.reviews_item__platform}>
+                        {item?.platform}
+                      </p>
+                    </div>
+
+                    <span className={styles.reviews_item__platform}></span>
                     <StarRating setRating={setRating} rating={item?.rating} />
                   </footer>
                 </li>
               ))}
           </ul>
           {hasMore && (
-            <button onClick={handleLoadMore} className={styles.button}>
+            <button
+              type="button"
+              onClick={handleLoadMore}
+              className={styles.button}
+            >
               {isLoading ? "загрузка..." : "загрузить еще"}
             </button>
           )}
